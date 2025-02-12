@@ -1,0 +1,487 @@
+msgid ""
+msgstr "Project-Id-Version: Game v4.7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: Wed Feb 12 15:41:31 2025\n"
+"Last-Translator: \n"
+"Language-Team: none\n"
+"Language: zh\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit"
+
+#: GameServer.RpcHandlers
+msgid "level completed! 🎉"
+msgstr ""
+
+#: GameServer.RpcHandlers
+msgid "level completed with warnings… 🎭"
+msgstr ""
+
+#: GameServer.RpcHandlers
+msgid "intermediate goal solved! 🎉"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L01_UniverseType
+msgid "凡事皆有类型和宇宙类型"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L01_UniverseType
+msgid "# 凡事皆有类型\n"
+"类型论基本原则——*凡事皆有类型 (Every term has a type)* 。任何一个依赖类型论语言需要一些内置的类型作为它的基本元素，因为如果没有类型，那就没有事物。在 Lean4 里，事物称为 `Term`，类型称为 `Type`。\n"
+"\n"
+"## 宇宙类型\n"
+"Lean4 内置了一系列基础类型，它们统称为**宇宙类型** (universe type) ，具体包含：`Sort 0`、`Sort 1`、`Sort2`……。并且规定 `Sort 0` 的类型是 `Sort 1`，`Sort 1` 的类型是 `Sort 2` 等等。`Sort` 在 Lean4 里是一个关键词。Lean4 用 `Term : Type` 语法表示事物和它的类型，例如 `Sort 0 : Sort 1`  表示 `Sort 0` 的类型是 `Sort 1`。\n"
+"\n"
+"`Sort` 后面除了可以跟自然数符号之外，Lean4 允许声明抽象的符号 `universe u` 。声明`u`后，我们可以抽象地表述宇宙类型的关系`Sort u : Sort (u + 1)`。`0 1 2 u` 统称为**宇宙层级** (universe level)，宇宙层级不是 `Term`，没有类型。\n"
+"\n"
+"```mermaid\n"
+"graph LR\n"
+"	A[Sort 0] --> B[Sort 1] --> C[Sort 2] --> D[Sort 3]\n"
+"```\n"
+"\n"
+"Lean4 给各个宇宙层级起了一些别名，比如：`Sort 0` 的别名是 `Sort` 和 `Prop`，`Sort 1` 的别名是`Type` 和 `Type 0`，`Sort 2` 的别名是`Type 1`。抽象地说，`Type u` 是 `Sort (u + 1)` 的别名。\n"
+"\n"
+"```mermaid\n"
+"graph LR\n"
+"	A[Sort 0<br>Sort<br>Prop] --> B[Sort 1<br>Type<br>Type 0] --> C[Sort 2<br>---<br>Type 1] --> D[Sort 3<br>---<br>Type 2]\n"
+"```\n"
+"\n"
+"在 Lean4 里可以使用 `#check` 命令来查看一个 `Term` 的类型\n"
+"```lean\n"
+"#check Prop   -- Prop : Type\n"
+"#check Type   -- Type : Type 1\n"
+"#check Sort 0 -- Prop : Type\n"
+"#check Sort 1 -- Type : Type 1\n"
+"universe u\n"
+"#check Sort u -- Sort u : Type u\n"
+"```"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L01_UniverseType
+msgid "请写出一个表达式，它的类型是`Sort 1`。"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L01_UniverseType
+msgid "提示：你可以尝试写下`exact Sort 0`，`exact Sort`或者`exact Prop`."
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L01_UniverseType
+msgid "总结：\n"
+"- `Sort 0`的类型是`Sort 1`；\n"
+"- `Sort`和`Prop`是`Sort 0`的别名；\n"
+"- `Type`是`Sort 1`的别名。"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L01_UniverseType
+msgid "可以使用 `exact` 将一个表达式应用到目标上，如果表达式的类型和目标相同，则表示证明完成。"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L02_FunctionAndFunctionType
+msgid "函数"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L02_FunctionAndFunctionType
+msgid "# 函数\n"
+"**函数**是一种内置的 `Term` ，也叫做 Lambda 表达式。Lean4 规定 Lambda 表达式的构造语法是 `fun (ArgTerm : ArgType) => BodyTerm` ，例如：`fun (a : Prop) => a` 。Lambda 表达式的简化语法是 `ArgTerm => BodyTerm`，例如 `fun a => a`。\n"
+"\n"
+"*凡事皆有类型*，**函数的类型**是另外一种内置的 `Term`，也叫做** Forall 表达式**，或者**箭头表达式**。Lean4 规定 箭头表达式的构造语法是 `(ArgTerm : ArgType) -> BodyType` ，例如 `(a : Prop) -> Prop` 。箭头表达式的简化语法是 `ArgType -> BodyType`，例如 `Prop -> Prop` 。并且，箭头表达式要求输入类型的类型和输出类型必须是宇宙层级，即 `ArgType : Sort u` 和 `BodyType : Sort v` 。\n"
+"\n"
+"Lean4 规定 Lambda 表达式 `fun (ArgTerm : ArgType) => BodyTerm` 对应的类型是 箭头表达式 `(ArgTerm : ArgType) -> BodyType`，其中 `BodyTerm : BodyType` 。例如函数 `fun (a : Prop) => a` 的类型是 `(a : Prop) -> Prop`。\n"
+"\n"
+"可以在 Lean4 中用如下代码检验：\n"
+"```lean\n"
+"#check fun (a : Prop) => a           -- Prop → Prop\n"
+"```"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L02_FunctionAndFunctionType
+msgid "请写出一个**函数**表达式，它的类型是`Prop -> Prop -> Prop`。(箭头是右结合的)"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L02_FunctionAndFunctionType
+msgid "提示：\n"
+"- 你可以尝试写下`exact fun (a : Prop) => fun (b : Prop) => a`；\n"
+"- 函数体没有使用到的参数名字推荐用`_`代替，所以等价表达式为`exact fun (a : Prop) => fun (_ : Prop) => a`；\n"
+"- 嵌套的函数中间的`fun => `可以省略，所以等价表达式为`exact fun (a : Prop) (_ : Prop) => a`。"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L02_FunctionAndFunctionType
+msgid "总结：\n"
+"- **函数**在lean4里用 `fun (ArgTerm : ArgType) => BodyTerm` 表示；\n"
+"- **函数类型**在lean4里用 `(ArgType : ArgType) -> BodyType` 表示，其中 `BodyTerm:BodyType`。"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L03_FunctionType
+msgid "函数类型"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L03_FunctionType
+msgid "# 函数类型\n"
+"*凡事皆有类型*，箭头表达式也应该有类型。Lean4 规定 `(ArgTerm : ArgType) -> BodyType` 的类型是 `Sort (imax u v)` ，其中：\n"
+"- `ArgType : Sort u`；\n"
+"- `BodyType : Sort v`；\n"
+"- `imax` 是 Lean4 内置的一个条件最值函数：当 `v = 0` 时 `imax u v = 0`；当 `v != 0` 时 `imax u v = max u v`；\n"
+"-  `max` 是 Lean4 内置的函数，表示取 `u` 和 `v` 中最大值。\n"
+"\n"
+"根据这条规则，我们来分析一下 箭头表达式 `(a : Prop) -> Prop` 的类型。因为 `Prop : Sort 1`，所以 `u=1` 和 `v=1`，然后可得它的类型是 `Sort (imax 1 1)`，化简后可得 `Sort 1`。综上，`Prop -> Prop` 的类型是 `Sort 1`，也就是 `Type`。\n"
+"\n"
+"可以在 Lean4 中用如下代码检验：\n"
+"```lean\n"
+"#check Prop -> Prop                  -- Type\n"
+"universe u v\n"
+"#check (a : Sort u) -> Sort v -> a   -- Sort (imax (u + 1) (v + 1) u)\n"
+"```\n"
+"\n"
+"箭头表达式允许嵌套使用，并且满足右结合性。我们来分析一下这个复杂的表达式，`(a : Sort u) -> Sort v -> a`，的类型。首先是 `Sort v -> a` 部分，因为 `Sort v : Sort (v + 1)` 和 `a : Sort u`，所以 `Sort v -> a` 的类型是 `Sort (imax (v + 1) u)`。 接着我们看 `(a : Sort u) -> ...` 部分，因为 `Sort u : Sort (u + 1)`，所以整个表达式的类型是 `Sort (imax (u + 1) (imax (v + 1) u))`。补充一个规定，Lean4 里的 `max` 和 `imax` 是一个多元表达式，`Sort (imax (u + 1) (imax (v + 1) u))` 可以简写成 `Sort (imax (u + 1) (v + 1) u)`。\n"
+"\n"
+"```mermaid\n"
+"graph LR\n"
+"    subgraph Sort\n"
+"        direction LR\n"
+"        A[Sort 0<br>Sort<br>Prop] --> B[Sort 1<br>Type<br>Type 0]\n"
+"        B --> C[Sort 2<br>---<br>Type 1]\n"
+"        C --> D[Sort 3<br>---<br>Type 2]\n"
+"    end\n"
+"    E[Forall] -.-> A\n"
+"    F[Lambda] --> E\n"
+"```\n"
+"\n"
+"## 宇宙层级补充\n"
+"在 Lean4 中，宇宙类型 `Sort` 后面跟着的宇宙符号有且仅有五种情况：\n"
+"- 自然数符号：`0 1 2`；\n"
+"- 抽象符号：`u v w`，在 `universe u v w` 声明后才能使用；\n"
+"- 加一运算符：`u + 1`；\n"
+"- `max` 运算符：`max u v`；\n"
+"- `imax` 运算符：`imax u v`。\n"
+"*凡事皆有类型*，宇宙层级不是一个 `Term`，它没有类型。"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L03_FunctionType
+msgid "请写出一个**函数类型**表达式，它的类型是`Sort (imax (u + 1) (v + 1) u)`。\n"
+"- 游戏引擎已经提前声明了宇宙层级`u v`，你可以直接使用。"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L03_FunctionType
+msgid "提示：你可以尝试写下`exact (a : Sort u) -> Sort v -> a`"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L03_FunctionType
+msgid "总结：\n"
+"- **函数**在lean4里用 `fun (ArgTerm : ArgType) => BodyTerm` 表示；\n"
+"- **函数类型**在lean4里用 `(ArgType : ArgType) -> BodyType` 表示，其中 `BodyTerm:BodyType`。\n"
+"- **函数类型**的类型是**宇宙类型**；\n"
+"- `imax` 是 Lean4 内置的一个条件最值函数：当 `v = 0` 时 `imax u v = 0`；当 `v != 0` 时 `imax u v = max u v`；\n"
+"-  `max` 是 Lean4 内置的函数，表示取 `u` 和 `v` 中最大值。"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L04_Inductive
+msgid "归纳类型"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L04_Inductive
+msgid "# 归纳类型\n"
+"在前面，我们见到了 Lean4 里的一些基本类型：宇宙类型`Prop, Type 0, Type 1, Type2 ...`，函数以及函数类型。但是，这些类型表达能力还是太弱了。为了描述更具体的事物，我们需要定义新的类型。\n"
+"\n"
+"Lean4 提供了一个叫做 `inductive` 的命令来让我们定义新的类型。由 `inductive` 命令定义的类型称为**归纳类型**。归纳类型的定义方式和数学归纳法类似，我们需要定义这个类型的构造器和构造器的类型。\n"
+"值得注意的是，我们只需要宇宙类型、函数、函数类型和归纳类型这几种类型就可以定义出数学中所有的类型。它的具体语法如下：\n"
+"```lean\n"
+"inductive Foo where\n"
+"  | constructor₁ : ... → Foo\n"
+"  | constructor₂ : ... → Foo\n"
+"  ...\n"
+"  | constructorₙ : ... → Foo\n"
+"```\n"
+"\n"
+"## 例子\n"
+"```lean\n"
+"inductive Eq : {α : Sort u} -> α -> α -> Prop where\n"
+"  | refl : (a : α) -> Eq a a\n"
+"```\n"
+"在这个例子中，我们定义了一个叫做 `Eq` 的归纳类型，它有一个参数 `α` 和一个构造器 `refl`。`refl` 构造器接受一个类型为 `α` 的值 `a`，并返回一个类型为 `Eq a a` 的值。\n"
+"其中参数 `α` 由花括号包裹，表示它是一个隐式参数。这样定义的好处是，当我们使用 `Eq` 类型时，Lean4 可以自动推断出 `α` 的类型。\n"
+"\n"
+"命令`inductive`实际上做了这么几件事情：\n"
+"- 将名字`Eq`注册为一个类型，并且标记它的类型是 `{α : Sort u} -> α -> α -> Prop`；\n"
+"- 自动生成了一个构造函数`Eq.refl`，和循环子`Eq.rec`作为它的公理。\n"
+"在 Lean4 中可以用如下代码来验证这一点：\n"
+"```lean\n"
+"namespace MyLogic\n"
+"inductive Eq : α → α → Prop where\n"
+"  | refl (a : α) : Eq a a\n"
+"#check Eq.refl\n"
+"  -- ∀ {α : Sort u} (a : α), Eq a a\n"
+"#check Eq.rec\n"
+"  -- {α : Sort u} →\n"
+"  --  {a : α} → {motive : (a_1 : α) → Eq a a_1 → Sort u_1} →\n"
+"  --    motive a (Eq.refl a) →\n"
+"  --      {a_1 : α} → (t : Eq a a_1) → motive a_1 t\n"
+"```\n"
+"后面的关卡我们会详细讲解它们的用法。这里补充两个语法规则：\n"
+"- 首先，`∀` 符号表示“对于任意”，它其实是箭头函数的另一种写法。比如 `∀ {α : Sort u} (a : α), Eq a a` 等价于 `(α : Sort u) -> (a : α) -> Eq a a`；\n"
+"- 其次，`→` 和 `->` 是等价的。\n"
+"lean4中类似的语法糖非常多，主要是为了方便书写和阅读，大家需要适应一下。\n"
+"在编辑器输入`∖forall`可以得到全称量词符号`∀`，输入`∖to`可以得到箭头符号`→`。"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L04_Inductive
+msgid "请写出一个表达式，它的类型是`{α : Sort u} -> α -> α -> Prop`。"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L04_Inductive
+msgid "请尝试输入 `exact Eq`"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L04_Inductive
+msgid "总结：\n"
+"- 我们可以用 `inductive` 命令来定义新的类型；\n"
+"- `inductive` 绑定一个名字到某个指定的类型，同时生成了一系列的函数作为这个新类型的公理。"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L04_Inductive
+msgid "等价关系 `Eq a b`\n"
+"```lean\n"
+"inductive Eq : α → α → Prop where\n"
+"  | refl (a : α) : Eq a a\n"
+"```"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L05_EqRefl
+msgid "Eq 的构造函数 refl"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L05_EqRefl
+msgid "# Eq 的构造函数 Eq.refl\n"
+"在上一关中，我们定义了一个叫做 `Eq` 的归纳类型，它有一个构造器 `Eq.refl`，它的类型是 `(a : α) -> Eq a a`。\n"
+"```lean\n"
+"inductive Eq : {α : Sort u} -> α -> α -> Prop where\n"
+"  | refl : (a : α) -> Eq a a\n"
+"```\n"
+"因为 `Eq.refl` 的类型是一个箭头表达式，所以它是一个函数。它接受一个类型为 `α` 的值 `a`，并返回一个类型为 `Eq a a` 的值。\n"
+"我们来使用一下这个构造函数。\n"
+"\n"
+"在 lean4 里使用函数的方式和其他变成语言有所不同：\n"
+"- 函数名字后面紧跟着参数，比如 `Eq.refl a`，而**不需要用括号包裹**；\n"
+"- 函数声明中用花括号包裹的参数表示隐式参数，比如 `{α : Sort u}`，默认不需要传入，lean4 会自动推到它；\n"
+"- 如果想要显式传入隐式参数，你可以在函数名前添加 `@` 符号，比如 `@Eq.refl α a`。"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L05_EqRefl
+msgid "请写出一个表达式，它的类型是`{α : Sort u} -> (a : α) -> Eq a a`。"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L05_EqRefl
+msgid "请尝试构造一个 Lambda 表达式 `fun (xxx : xxx) => xxx`，并且调用 `Eq.refl` 构造函数，不要忘记`exact`关键字。"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L05_EqRefl
+msgid "- 你可以使用 `exact fun {α : Sort u} (a : α) => Eq.refl a`；\n"
+"- 或者显式传入隐式参数 `exact fun {α : Sort u} (a : α) => @Eq.refl α a`。"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L05_EqRefl
+msgid "`Eq`类型的构造器。"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L06_EqRec
+msgid "Eq 的循环子和对称性"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L06_EqRec
+msgid "# Eq 的循环子和对称性\n"
+"lean4 的编译器自动给 `Eq` 类型生成了一个循环子，叫做 `Eq.rec`。它的类型是\n"
+"```lean\n"
+"recursor Eq.rec.{u_1, u} : {α : Sort u} →\n"
+"  {a : α} → {motive : (a_1 : α) → Eq a a_1 → Sort u_1} → motive a (Eq.refl a) → {a_1 : α} → (t : Eq a a_1) → motive a_1 t\n"
+"```\n"
+"第一次看到这个循环子，大部分人都会感到困惑。\n"
+"这个循环子的核心是 `motive` 函数，它接受两个参数：一个类型为 `α` 的值 `a_1` 和一个类型为 `Eq a a_1` 的值，返回一个 `Sort u_1` 类型的值。\n"
+"我们只需要证明特例 `motive a` 成立，我们就可以证明所有情况下 `motive` 都成立。\n"
+"\n"
+"在这个关卡里，我们引入两个新的**策略**：`intro` 和 `apply`。\n"
+"\n"
+"## 策略 intro\n"
+"如果当前目标是 `P -> Q`，那么可以使用 `intro h`，将目标转化成一个条件 `h : P` 和一个新目标 `Q`。从数学上来说， 这个操作叫做 `induction`， 要证明 `P -> Q`，可以转为：假设 `P` 成立，证明 `Q` 成立。\n"
+"本质上，`intro` 是一个语法树转化函数，它会等待用户输入 `Q` 的证明 `q`，然后构建出 `fun (h : P) => q` 这个表达式。而这个表达式的类型就是 `P -> Q`。\n"
+"\n"
+"## 策略 apply\n"
+"如果当前目标是证明 `Q`，并且存在一个证明 `t : P -> Q`，我们可以使用 `apply t` 将目标转化为 `P`。\n"
+"本质上，`apply` 也是一个语法树转化函数，它会等待用户输入 `P` 的证明 `p`，然后构建出 `t p` 这个表达式，而这个表达式的类型就是 `Q`。"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L06_EqRec
+msgid "`Eq` 的对称性，即 `Eq a b -> Eq b a`。"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L06_EqRec
+msgid "请尝试使用 `intro α a` 来转化证明目标，你可以输入 `\\` 和 `a`，来输入 `α`。"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L06_EqRec
+msgid "请尝试使用 `apply Eq.rec` 来转化证明目标，lean4会自动推断使用 `Eq.rec` 所需要的参数。"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L06_EqRec
+msgid "请尝试使用 `exact Eq.refl a`"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L06_EqRec
+msgid "或者 `apply Eq.refl`"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L06_EqRec
+msgid "你可以使用 `intro` 和 `apply` 策略来证明 `Eq` 的对称性\n"
+"```lean\n"
+"intro α a\n"
+"apply Eq.rec\n"
+"apply Eq.refl\n"
+"```\n"
+"你也可以直接构建出 Lambda 表达式\n"
+"```lean\n"
+"exact fun {α : Sort u} => fun {a : α} => @Eq.rec α a (fun (x : α) (_ : Eq a x) => Eq x a) (Eq.refl a)\n"
+"````\n"
+"来证明 `Eq` 的对称性。这里注意两点：\n"
+"  - lean4 的隐式参数推断可能会出现问题，尝试使用`Eq.rec`；\n"
+"  - 对应的motive函数：`fun (x : α) (_ : Eq a x) => Eq x a`。"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L06_EqRec
+msgid "如果当前目标是 `P -> Q`，那么可以使用 `intro h`，将目标转化成一个条件 `h : P` 和一个新目标 `Q`。从数学上来说， 这个操作叫做 `induction`， 要证明 $P -> Q$，可以转为：假设 `P` 成立，证明 `Q` 成立。\n"
+"本质上，`intro` 是一个语法树转化函数，它会等待用户输入 `Q` 的证明 `q`，然后构建出 `fun (h : P) => q` 这个表达式。而这个表达式的类型就是 `P -> Q`。"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L06_EqRec
+msgid "如果当前目标是证明 `Q`，并且存在一个证明 `t : P -> Q`，我们可以使用 `apply t` 将目标转化为 `P`。\n"
+"本质上，`apply` 也是一个语法树转化函数，它会等待用户输入 `P` 的证明 `p`，然后构建出 `t p` 这个表达式，而这个表达式的类型就是 `Q`。"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L06_EqRec
+msgid "`Eq`类型的循环子 `Eq.rec`\n"
+"```lean\n"
+"recursor Eq.rec.{u_1, u} : {α : Sort u} →\n"
+"  {a : α} → {motive : (a_1 : α) → Eq a a_1 → Sort u_1} → motive a (Eq.refl a) → {a_1 : α} → (t : Eq a a_1) → motive a_1 t\n"
+"```"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L07_EqTrans
+msgid "Eq 的传递性"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L07_EqTrans
+msgid "`Eq` 的传递性，即 `Eq a b -> Eq b c -> Eq a c`。"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L07_EqTrans
+msgid "你需要使用到公理 `Eq.rec`，策略 `intro` 和 `apply`。"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L07_EqTrans
+msgid "尝试直接使用 `Eq.rec`"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L07_EqTrans
+msgid "尝试 apply 一个函数 `fun (xxx : xxx) => xxx`。"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations.L07_EqTrans
+msgid "如果你使用的是 apply 自动补全的 `Eq.rec` 的参数，那么你的证明会非常简洁。\n"
+"如果你觉得不是很直观，并不那么清楚 `Eq.rec` 究竟是怎么工作的，那么你可以使用 lean4 的如下代码来查看 tactic 自动生成的表达式：\n"
+"```lean\n"
+"set_option pp.all true\n"
+"#print Eq.trans\n"
+"```\n"
+"这个表达式会被送到 lean4 的内核中进行类型校验，内核发现它的类型正是目标类型，所以它是一个合法的证明。\n"
+"```lean\n"
+"fun {α : Sort u} {a b c : α} => @Eq.rec α a (fun {b : α} {_ : Eq a b} => Eq b c -> Eq a c) (fun (h : Eq a c) => h) b\n"
+"```\n"
+"这个表达式还是比较复杂的，关键是要理解 `Eq.rec` 的动机参数\n"
+"```lean\n"
+"motive := (fun {b : α} {_ : Eq a b} => Eq b c -> Eq a c)\n"
+"```\n"
+"我建议你可以在草稿纸上拆解一下这个表达式，看看它是如何工作的。"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations
+msgid "基本类型和操作"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations
+msgid "欢迎来到 Lean4 的快速入门教程的第一章节！\n"
+"在这一章节，我们将学习 Lean4 的基本类型和操作。\n"
+"这些概念是 Lean4 的构建基石。\n"
+"具体包括：\n"
+"- 凡事皆有类型和宇宙类型\n"
+"- 函数`fun (xxx : xxx) => xxx`\n"
+"- 函数类型`(xxx : xxx) -> xxx`\n"
+"- 归纳类型`inductive`\n"
+"- `Eq`的构造函数`Eq.refl`\n"
+"- `Eq`的循环子`rec`和对称性`symm`\n"
+"- `Eq`的的传递性`trans`"
+msgstr ""
+
+#: Game.Levels.Or.L01_Or
+msgid "Or 类型"
+msgstr ""
+
+#: Game.Levels.Or.L01_Or
+msgid "# Or 类型\n"
+"\n"
+"在这个关卡里，我们将学习 `Or` 类型在 lean4 中是如何构造的。\n"
+"```lean\n"
+"inductive Or (a b : Prop) : Prop where\n"
+"  | inl : {a b : Prop} -> (h : a) -> Or a b\n"
+"  | inr : {a b : Prop} -> (h : b) -> Or a b\n"
+"```\n"
+"`Or` 类型是一个归纳类型，它有两个构造器 `Or.inl` 和 `Or.inr`。\n"
+"\n"
+"同时，lean4 编译器会自动生成一个 `Or.rec` 函数，用于模式匹配。\n"
+"```lean\n"
+"recursor Or.rec : ∀ {a b : Prop} {motive : Or a b → Prop},\n"
+"  (∀ (h : a), motive (@Or.inl a b h)) → (∀ (h : b), motive (@Or.inr a b h)) → ∀ (t : Or a b), motive t\n"
+"```\n"
+"`Or.rec` 函数表示，我们可以证明某个命题在条件 `ha : a` 和 `hb : b` 下都成立，那么 `h: Or a b` 下则成立。"
+msgstr ""
+
+#: Game.Levels.Or.L01_Or
+msgid "请输入 `intro a b c`"
+msgstr ""
+
+#: Game.Levels.Or.L01_Or
+msgid "尝试直接 apply `Or.rec`"
+msgstr ""
+
+#: Game.Levels.Or.L01_Or
+msgid "这里产生了两个目标，我们分别证明。首先使用 intro 来引入变量 ha h1 h2"
+msgstr ""
+
+#: Game.Levels.Or
+msgid "Or 类型"
+msgstr ""
+
+#: Game
+msgid "Lean4 快速入门"
+msgstr ""
+
+#: Game
+msgid "# Lean4 快速入门\n"
+"\n"
+"## 目录\n"
+"- 基本类型与操作\n"
+"  - 凡事皆有类型和宇宙类型\n"
+"  - 函数`fun (xxx : xxx) => xxx`\n"
+"  - 函数类型`(xxx : xxx) -> xxx`\n"
+"  - 归纳类型`inductive`\n"
+"  - `Eq`的构造函数`Eq.refl`\n"
+"  - `Eq`的循环子`rec`和对称性`symm`\n"
+"  - `Eq`的的传递性`trans`"
+msgstr ""
+
+#: Game
+msgid "*Game version: 0.0.1*"
+msgstr ""
+
+#: Game
+msgid "Lean4 快速入门"
+msgstr ""
+
+#: Game
+msgid "Lean4 快速入门"
+msgstr ""
