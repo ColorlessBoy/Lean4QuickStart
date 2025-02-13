@@ -1,7 +1,7 @@
 msgid ""
 msgstr "Project-Id-Version: Game v4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: Wed Feb 12 15:41:31 2025\n"
+"POT-Creation-Date: Thu Feb 13 22:01:05 2025\n"
 "Last-Translator: \n"
 "Language-Team: none\n"
 "Language: zh\n"
@@ -244,11 +244,26 @@ msgid "等价关系 `Eq a b`\n"
 "```"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L05_EqRefl
+#: Game.Levels.BasicTypesAndOperations
+msgid "基本类型和操作"
+msgstr ""
+
+#: Game.Levels.BasicTypesAndOperations
+msgid "欢迎来到 Lean4 的快速入门教程的第一章节！\n"
+"在这一章节，我们将学习 Lean4 的基本类型和操作。\n"
+"这些概念是 Lean4 的构建基石。\n"
+"具体包括：\n"
+"- 凡事皆有类型和宇宙类型\n"
+"- 函数`fun (xxx : xxx) => xxx`\n"
+"- 函数类型`(xxx : xxx) -> xxx`\n"
+"- 归纳类型`inductive`"
+msgstr ""
+
+#: Game.Levels.Eq.L01_EqRefl
 msgid "Eq 的构造函数 refl"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L05_EqRefl
+#: Game.Levels.Eq.L01_EqRefl
 msgid "# Eq 的构造函数 Eq.refl\n"
 "在上一关中，我们定义了一个叫做 `Eq` 的归纳类型，它有一个构造器 `Eq.refl`，它的类型是 `(a : α) -> Eq a a`。\n"
 "```lean\n"
@@ -257,6 +272,9 @@ msgid "# Eq 的构造函数 Eq.refl\n"
 "```\n"
 "因为 `Eq.refl` 的类型是一个箭头表达式，所以它是一个函数。它接受一个类型为 `α` 的值 `a`，并返回一个类型为 `Eq a a` 的值。\n"
 "我们来使用一下这个构造函数。\n"
+"```lean\n"
+"constructor Eq.refl.{u} : ∀ {α : Sort u} (a : α), Eq a a\n"
+"```\n"
 "\n"
 "在 lean4 里使用函数的方式和其他变成语言有所不同：\n"
 "- 函数名字后面紧跟着参数，比如 `Eq.refl a`，而**不需要用括号包裹**；\n"
@@ -264,28 +282,29 @@ msgid "# Eq 的构造函数 Eq.refl\n"
 "- 如果想要显式传入隐式参数，你可以在函数名前添加 `@` 符号，比如 `@Eq.refl α a`。"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L05_EqRefl
+#: Game.Levels.Eq.L01_EqRefl
 msgid "请写出一个表达式，它的类型是`{α : Sort u} -> (a : α) -> Eq a a`。"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L05_EqRefl
-msgid "请尝试构造一个 Lambda 表达式 `fun (xxx : xxx) => xxx`，并且调用 `Eq.refl` 构造函数，不要忘记`exact`关键字。"
+#: Game.Levels.Eq.L01_EqRefl
+msgid "- 请尝试构造一个 Lambda 表达式 `fun (xxx : xxx) => xxx`，并且调用 `Eq.refl` 构造函数，不要忘记`exact`关键字。\n"
+"- 你可以输入 `\\` 和 `a`，它们会自动转化成 `α`。"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L05_EqRefl
+#: Game.Levels.Eq.L01_EqRefl
 msgid "- 你可以使用 `exact fun {α : Sort u} (a : α) => Eq.refl a`；\n"
 "- 或者显式传入隐式参数 `exact fun {α : Sort u} (a : α) => @Eq.refl α a`。"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L05_EqRefl
+#: Game.Levels.Eq.L01_EqRefl
 msgid "`Eq`类型的构造器。"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L06_EqRec
+#: Game.Levels.Eq.L02_EqRec
 msgid "Eq 的循环子和对称性"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L06_EqRec
+#: Game.Levels.Eq.L02_EqRec
 msgid "# Eq 的循环子和对称性\n"
 "lean4 的编译器自动给 `Eq` 类型生成了一个循环子，叫做 `Eq.rec`。它的类型是\n"
 "```lean\n"
@@ -307,27 +326,27 @@ msgid "# Eq 的循环子和对称性\n"
 "本质上，`apply` 也是一个语法树转化函数，它会等待用户输入 `P` 的证明 `p`，然后构建出 `t p` 这个表达式，而这个表达式的类型就是 `Q`。"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L06_EqRec
+#: Game.Levels.Eq.L02_EqRec
 msgid "`Eq` 的对称性，即 `Eq a b -> Eq b a`。"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L06_EqRec
+#: Game.Levels.Eq.L02_EqRec
 msgid "请尝试使用 `intro α a` 来转化证明目标，你可以输入 `\\` 和 `a`，来输入 `α`。"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L06_EqRec
+#: Game.Levels.Eq.L02_EqRec
 msgid "请尝试使用 `apply Eq.rec` 来转化证明目标，lean4会自动推断使用 `Eq.rec` 所需要的参数。"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L06_EqRec
+#: Game.Levels.Eq.L02_EqRec
 msgid "请尝试使用 `exact Eq.refl a`"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L06_EqRec
+#: Game.Levels.Eq.L02_EqRec
 msgid "或者 `apply Eq.refl`"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L06_EqRec
+#: Game.Levels.Eq.L02_EqRec
 msgid "你可以使用 `intro` 和 `apply` 策略来证明 `Eq` 的对称性\n"
 "```lean\n"
 "intro α a\n"
@@ -343,17 +362,17 @@ msgid "你可以使用 `intro` 和 `apply` 策略来证明 `Eq` 的对称性\n"
 "  - 对应的motive函数：`fun (x : α) (_ : Eq a x) => Eq x a`。"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L06_EqRec
+#: Game.Levels.Eq.L02_EqRec
 msgid "如果当前目标是 `P -> Q`，那么可以使用 `intro h`，将目标转化成一个条件 `h : P` 和一个新目标 `Q`。从数学上来说， 这个操作叫做 `induction`， 要证明 $P -> Q$，可以转为：假设 `P` 成立，证明 `Q` 成立。\n"
 "本质上，`intro` 是一个语法树转化函数，它会等待用户输入 `Q` 的证明 `q`，然后构建出 `fun (h : P) => q` 这个表达式。而这个表达式的类型就是 `P -> Q`。"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L06_EqRec
+#: Game.Levels.Eq.L02_EqRec
 msgid "如果当前目标是证明 `Q`，并且存在一个证明 `t : P -> Q`，我们可以使用 `apply t` 将目标转化为 `P`。\n"
 "本质上，`apply` 也是一个语法树转化函数，它会等待用户输入 `P` 的证明 `p`，然后构建出 `t p` 这个表达式，而这个表达式的类型就是 `Q`。"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L06_EqRec
+#: Game.Levels.Eq.L02_EqRec
 msgid "`Eq`类型的循环子 `Eq.rec`\n"
 "```lean\n"
 "recursor Eq.rec.{u_1, u} : {α : Sort u} →\n"
@@ -361,27 +380,27 @@ msgid "`Eq`类型的循环子 `Eq.rec`\n"
 "```"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L07_EqTrans
+#: Game.Levels.Eq.L03_EqTrans
 msgid "Eq 的传递性"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L07_EqTrans
+#: Game.Levels.Eq.L03_EqTrans
 msgid "`Eq` 的传递性，即 `Eq a b -> Eq b c -> Eq a c`。"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L07_EqTrans
+#: Game.Levels.Eq.L03_EqTrans
 msgid "你需要使用到公理 `Eq.rec`，策略 `intro` 和 `apply`。"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L07_EqTrans
+#: Game.Levels.Eq.L03_EqTrans
 msgid "尝试直接使用 `Eq.rec`"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L07_EqTrans
+#: Game.Levels.Eq.L03_EqTrans
 msgid "尝试 apply 一个函数 `fun (xxx : xxx) => xxx`。"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L07_EqTrans
+#: Game.Levels.Eq.L03_EqTrans
 msgid "如果你使用的是 apply 自动补全的 `Eq.rec` 的参数，那么你的证明会非常简洁。\n"
 "如果你觉得不是很直观，并不那么清楚 `Eq.rec` 究竟是怎么工作的，那么你可以使用 lean4 的如下代码来查看 tactic 自动生成的表达式：\n"
 "```lean\n"
@@ -399,31 +418,184 @@ msgid "如果你使用的是 apply 自动补全的 `Eq.rec` 的参数，那么�
 "我建议你可以在草稿纸上拆解一下这个表达式，看看它是如何工作的。"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations
-msgid "基本类型和操作"
+#: Game.Levels.Eq.L04_EqMp
+msgid "Eq.mp"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations
-msgid "欢迎来到 Lean4 的快速入门教程的第一章节！\n"
-"在这一章节，我们将学习 Lean4 的基本类型和操作。\n"
-"这些概念是 Lean4 的构建基石。\n"
-"具体包括：\n"
-"- 凡事皆有类型和宇宙类型\n"
-"- 函数`fun (xxx : xxx) => xxx`\n"
-"- 函数类型`(xxx : xxx) -> xxx`\n"
-"- 归纳类型`inductive`\n"
+#: Game.Levels.Eq.L04_EqMp
+msgid "`Eq.mp` 是 Eq 版本的 modus ponens，即 `Eq a b -> a -> b`。"
+msgstr ""
+
+#: Game.Levels.Eq.L05_EqMpr
+msgid "Eq.mpr"
+msgstr ""
+
+#: Game.Levels.Eq.L05_EqMpr
+msgid "`Eq.mpr` 是 Eq 版本的 modus ponens 的逆向版本 (reverse)，即 `Eq a b -> b -> a`。"
+msgstr ""
+
+#: Game.Levels.Eq.L05_EqMpr
+msgid "你可以尝试使用证明过的定理 `Eq.symm` 和 `Eq.mp`。"
+msgstr ""
+
+#: Game.Levels.Eq
+msgid "Eq 类型"
+msgstr ""
+
+#: Game.Levels.Eq
+msgid "# Eq 类型\n"
+"这个章节中，我们将学习 `Eq` 类型在 lean4 中是如何构造的。\n"
+"`Eq`类型：\n"
 "- `Eq`的构造函数`Eq.refl`\n"
-"- `Eq`的循环子`rec`和对称性`symm`\n"
-"- `Eq`的的传递性`trans`"
+"- `Eq`的循环子`Eq.rec`和对称性`Eq.symm`\n"
+"- `Eq`的的传递性`Eq.trans`"
 msgstr ""
 
-#: Game.Levels.Or.L01_Or
-msgid "Or 类型"
+#: Game.Levels.Iff.L01_IffIntro
+msgid "Iff 类型"
 msgstr ""
 
-#: Game.Levels.Or.L01_Or
-msgid "# Or 类型\n"
+#: Game.Levels.Iff.L01_IffIntro
+msgid "# Iff 类型\n"
+"在这一章节，我们要碰到 `lean4` 中的一个新命令 `structure`，它也是用来声明一个新类型。\n"
+"读者可能会好奇，我不是说过 `inductive` 已经足够了，为什么还会有 `structure`？\n"
+"答案是为了方便。你可以认为 `structure` 是一个语法糖，在 `inductive` 的基础上添加了一些新的功能。\n"
 "\n"
+"在 lean4 中，逻辑连接符 `Iff` 类型是这样定义的：\n"
+"```lean\n"
+"structure Iff (a b : Prop) : Prop where\n"
+"  intro ::\n"
+"  mp : a -> b\n"
+"  mpr : b -> a\n"
+"```\n"
+"\n"
+"本质上，它同时定义了三个函数：\n"
+"- `Iff.intro : {a b : Prop} -> (a -> b) -> (b -> a) -> Iff a b`\n"
+"- `Iff.mp : {a b : Prop} -> Iff a b -> a -> b`\n"
+"- `Iff.mpr : {a b : Prop} -> Iff a b -> b -> a`\n"
+"\n"
+"你可以简单地将这三个函数看成 `Iff` 类型的三个公理。\n"
+"如果分开定义类型和对应公理，既繁琐又容易出错，所以 `lean4` 设计了 `structure` 将这些过程打包封装。\n"
+"同时，因为从语法上能够体现这种绑定关系，lean4 的编译器也能对 `structure` 结构进行一些优化，增加运行效率。\n"
+"\n"
+"比如，lean4 也支持这样定义 `Iff` 类型：\n"
+"```lean\n"
+"inductive Iff : Prop -> Prop -> Prop where\n"
+"  | intro : {a b : Prop} -> (a -> b) -> (b -> a) -> Iff a b\n"
+"axiom Iff.mp : {a : Prop} -> {b : Prop} -> Iff a b -> a -> b\n"
+"axiom Iff.mpr : {a : Prop} -> {b : Prop} -> Iff a b -> b -> a\n"
+"```\n"
+"但是，如果要让编译器能够分析出这三个部分的关系并优化，编译器的具体实现将会非常复杂，得不偿失。\n"
+"当然，lean4 也会自动生成公理 `Iff.rec`，就这个类型而言用处不大，我们就不展开讲了。"
+msgstr ""
+
+#: Game.Levels.Iff.L01_IffIntro
+msgid "基于 Iff.intro 我们可以证明它的自指性"
+msgstr ""
+
+#: Game.Levels.Iff.L01_IffIntro
+msgid "借助这个证明，我们可以看到 `apply` 的具体细节。\n"
+"- 首先 `Iff.intro` 实际上可以证明 `{a : Prop} -> {a : Prop} -> (a -> a) -> (a -> a) -> Iff a a`；\n"
+"- 观察对比目标命题，`Iff.intro` 包含两个相同的条件 `(a -> a)` 和 `(a -> a)`，`apply`会将这两个条件转化成新的目标。"
+msgstr ""
+
+#: Game.Levels.Iff.L01_IffIntro
+msgid "Iff 类型\n"
+"```lean\n"
+"inductive Iff : Prop -> Prop -> Prop where\n"
+"  | intro : {a : Prop} -> {b : Prop} -> (a -> b) -> (b -> a) -> Iff a b\n"
+"```"
+msgstr ""
+
+#: Game.Levels.Iff.L02_IffTrans
+msgid "Iff 的传递性"
+msgstr ""
+
+#: Game.Levels.Iff.L02_IffTrans
+msgid "你可以先尝试使用 `intro a b c hab hbc`"
+msgstr ""
+
+#: Game.Levels.Iff.L02_IffTrans
+msgid "你可以先尝试使用 `Iff.intro`"
+msgstr ""
+
+#: Game.Levels.Iff.L02_IffTrans
+msgid "你可以先尝试构造一个函数 `fun (xxx : xxx) => xxx`，并且使用 `Iff.mp`"
+msgstr ""
+
+#: Game.Levels.Iff.L02_IffTrans
+msgid "你可以先尝试构造一个函数 `fun (xxx : xxx) => xxx`，并且使用 `Iff.mpr`"
+msgstr ""
+
+#: Game.Levels.Iff.L03_IffOfEq
+msgid "Iff与Eq的关系"
+msgstr ""
+
+#: Game.Levels.Iff.L03_IffOfEq
+msgid "你可以尝试使用 `Eq.rec`"
+msgstr ""
+
+#: Game.Levels.Iff
+msgid "Iff 类型"
+msgstr ""
+
+#: Game.Levels.Iff
+msgid "# Iff 类型\n"
+"这个章节中，我们将学习 `Iff` 类型在 lean4 中是如何构造的。\n"
+"`Iff` 类型\n"
+"- `Iff`的构造函数`Iff.intro`和定理`Iff.refl`\n"
+"- `Iff.trans`\n"
+"- `Iff.of_eq`"
+msgstr ""
+
+#: Game.Levels.And.L01_AndSymm
+msgid "And.symm"
+msgstr ""
+
+#: Game.Levels.And.L01_AndSymm
+msgid "# And 类型\n"
+"And 类型也是通过 structure 来构建的\n"
+"```lean\n"
+"structure And (a b : Prop) : Prop where\n"
+"  intro ::\n"
+"  left : a\n"
+"  right : b\n"
+"```\n"
+"它本质上定义了这三个函数：\n"
+"- `And.intro : (a b : Prop) -> And a b`\n"
+"- `And.left : {a b : Prop} -> And a b -> a`\n"
+"- `And.right : {a b : Prop} -> And a b -> b`"
+msgstr ""
+
+#: Game.Levels.And.L01_AndSymm
+msgid "请使用上述三个函数 `And.intro`, `And.left` 和 `And.right`"
+msgstr ""
+
+#: Game.Levels.And.L02_AndAssoc
+msgid "and_assoc"
+msgstr ""
+
+#: Game.Levels.And.L02_AndAssoc
+msgid "如果一个表达式是 `h : And a b`，我们可以将 `And.left h` 简化为 `h.left`。"
+msgstr ""
+
+#: Game.Levels.And
+msgid "And 类型"
+msgstr ""
+
+#: Game.Levels.And
+msgid "# And 类型\n"
+"`And`类型：\n"
+"- `And.symm`\n"
+"- `and_assoc`"
+msgstr ""
+
+#: Game.Levels.Or.L01_OrElim
+msgid "Or.elim"
+msgstr ""
+
+#: Game.Levels.Or.L01_OrElim
+msgid "# Or 类型\n"
 "在这个关卡里，我们将学习 `Or` 类型在 lean4 中是如何构造的。\n"
 "```lean\n"
 "inductive Or (a b : Prop) : Prop where\n"
@@ -440,20 +612,180 @@ msgid "# Or 类型\n"
 "`Or.rec` 函数表示，我们可以证明某个命题在条件 `ha : a` 和 `hb : b` 下都成立，那么 `h: Or a b` 下则成立。"
 msgstr ""
 
-#: Game.Levels.Or.L01_Or
+#: Game.Levels.Or.L01_OrElim
 msgid "请输入 `intro a b c`"
 msgstr ""
 
-#: Game.Levels.Or.L01_Or
+#: Game.Levels.Or.L01_OrElim
 msgid "尝试直接 apply `Or.rec`"
 msgstr ""
 
-#: Game.Levels.Or.L01_Or
+#: Game.Levels.Or.L01_OrElim
 msgid "这里产生了两个目标，我们分别证明。首先使用 intro 来引入变量 ha h1 h2"
+msgstr ""
+
+#: Game.Levels.Or.L01_OrElim
+msgid "Or 类型\n"
+"```lean\n"
+"inductive Or (a b : Prop) : Prop where\n"
+"  | inl : {a b : Prop} -> (h : a) -> Or a b\n"
+"  | inr : {a b : Prop} -> (h : b) -> Or a b\n"
+"```"
+msgstr ""
+
+#: Game.Levels.Or.L02_OrSymm
+msgid "Or.symm"
+msgstr ""
+
+#: Game.Levels.Or.L02_OrSymm
+msgid "尝试使用`Or.elim`"
+msgstr ""
+
+#: Game.Levels.Or.L03_OrAssoc
+msgid "or_assoc"
 msgstr ""
 
 #: Game.Levels.Or
 msgid "Or 类型"
+msgstr ""
+
+#: Game.Levels.Or
+msgid "# Or 类型\n"
+"这个章节中，我们将学习 `Or` 类型在 lean4 中是如何构造的。\n"
+"`Or`类型：\n"
+"- `Or`的构造函数`Or.inl`和`Or.inr`和定理`Or.elim`\n"
+"- `Or.symm`\n"
+"- `or_assoc`"
+msgstr ""
+
+#: Game.Levels.Not.L01_True
+msgid "True 类型与 False 类型"
+msgstr ""
+
+#: Game.Levels.Not.L01_True
+msgid "# True 类型与 False 类型\n"
+"这一节，我们来看看lean4中是如何构建真类型和假类型的。\n"
+"\n"
+"## True 类型\n"
+"真类型是一个inductive类型\n"
+"```lean\n"
+"inductive True : Prop where\n"
+"  | intro : True\n"
+"```\n"
+"它包含一个无参数的构造器，即 `True.intro : True`。\n"
+"它的循环子如下所示，实际上没有什么用处：\n"
+"```lean\n"
+"recursor True.rec.{u} : {motive : True → Sort u} → motive True.intro → (t : True) → motive t\n"
+"```\n"
+"\n"
+"## False 类型\n"
+"假类型是一个inductive类型，它不包含任何构造器。\n"
+"```lean\n"
+"inductive False : Prop\n"
+"```\n"
+"它的循环子非常重要，任何没有构造器的类型都是假类型：\n"
+"```lean\n"
+"recursor False.rec.{u} : (motive : False → Sort u) → (t : False) → motive t\n"
+"```\n"
+"它表示：如果前提假设错误，那么我们可以得到任何结论。\n"
+"这正是诡辩论的基础，使用一个错误的前提，推导出想要的结论。\n"
+"虽然整个过程的逻辑是对的，但是实际上没有任何信息价值。\n"
+"因为我们使用相同的错误前提可以推导出完全相反的结论。\n"
+"如果一个观点正着说反着说都是对的，那它就毫无价值。\n"
+"\n"
+"## 对比\n"
+"\n"
+"｜ 性质 ｜ 真类型 | 假类型 |\n"
+"｜------｜------｜------｜\n"
+"｜构造器｜True.intro｜无｜\n"
+"｜循环子｜没用｜False.rec｜"
+msgstr ""
+
+#: Game.Levels.Not.L01_True
+msgid "在 lean4 中经常用到的一个公理是 `trivial`，它表示 `True` 就是 `True`。"
+msgstr ""
+
+#: Game.Levels.Not.L02_absurd
+msgid "absurd"
+msgstr ""
+
+#: Game.Levels.Not.L02_absurd
+msgid "# Not 类型\n"
+"在 lean4 里 Not 类型像是一个函数的别名，它通过 `def` 命令声明出来\n"
+"```lean\n"
+"def Not (a : Prop) : Prop := a -> False\n"
+"```\n"
+"它表示如果命题 a 是正确的那么 `False` 将是正确的。\n"
+"因为 `False` 不可能是正确的，所以 `a` 不正确。\n"
+"在使用 lean4 构建数学公理体系时，\n"
+"不允许出现 `False` 的构造器。如果能构造出类型为 False 的命题，那么表示这个公理体系自相矛盾。\n"
+"\n"
+"还记得 False 的循环子吗？这道题目会用到它\n"
+"```lean\n"
+"recursor False.rec : (motive : False → Sort u) → (t : False) → motive t\n"
+"```\n"
+"lean4 可能无法推测 `False.rec` 需要用到的 motive 函数，你可以使用 `apply @False.rec fun (xxx : xxx) => xxx` 显式传入 motive 函数。"
+msgstr ""
+
+#: Game.Levels.Not.L03_NotNotIntro
+msgid "not_not_intro"
+msgstr ""
+
+#: Game.Levels.Not.L03_NotNotIntro
+msgid "`Not (Not p)` 等价于 `p -> False -> False`"
+msgstr ""
+
+#: Game.Levels.Not
+msgid "Not 类型"
+msgstr ""
+
+#: Game.Levels.Not
+msgid "# Not 类型\n"
+"这个章节中，我们将学习 `Not` 类型在 lean4 中是如何构造的。\n"
+"`Not` 类型\n"
+"- `True` 类型和 `False` 类型\n"
+"- `absurd`\n"
+"- `not_not_intro`"
+msgstr ""
+
+#: Game.Levels.Exists.L01_Exists
+msgid "Exists 类型"
+msgstr ""
+
+#: Game.Levels.Exists.L01_Exists
+msgid "# Exists 类型\n"
+"\n"
+"Exists 类型相对来说比较抽象，它是这样定义的\n"
+"```lean\n"
+"inductive Exists : {α : Sort u} -> (p : α -> Prop) -> Prop where\n"
+"  | intro : {α : Sort u} -> {p : α -> Prop} -> (w : α) -> (h : p w) -> Exists p\n"
+"```\n"
+"它的构造器接受一个 `α` 的类型实例 `w`，以及对应特例命题 `p w` 的证明，返回一个类型为 `Exists p` 的命题。\n"
+"\n"
+"它的循环子是\n"
+"```lean\n"
+"recursor Exists.rec.{u} : ∀ {α : Sort u} {p : α → Prop} {motive : Exists p → Prop},\n"
+"  (∀ (w : α) (h : p w), motive (Exists.intro w h)) → ∀ (t : Exists p), motive t\n"
+"```\n"
+"它表示条件中的 `t : Exists p` 可以转化成证明具体的特例 `(w : α)` 和 `(h : p w)`"
+msgstr ""
+
+#: Game.Levels.Exists.L01_Exists
+msgid "尝试使用`Exists.rec`转化条件`Exists p`"
+msgstr ""
+
+#: Game.Levels.Exists.L01_Exists
+msgid "尝试使用`Exists.intro`转化目标`Exists q`"
+msgstr ""
+
+#: Game.Levels.Exists
+msgid "Exists 类型"
+msgstr ""
+
+#: Game.Levels.Exists
+msgid "# Exists 类型\n"
+"`Exists` 类型\n"
+"- `Exists.imp`"
 msgstr ""
 
 #: Game
@@ -469,9 +801,25 @@ msgid "# Lean4 快速入门\n"
 "  - 函数`fun (xxx : xxx) => xxx`\n"
 "  - 函数类型`(xxx : xxx) -> xxx`\n"
 "  - 归纳类型`inductive`\n"
+"- `Eq` 类型\n"
 "  - `Eq`的构造函数`Eq.refl`\n"
-"  - `Eq`的循环子`rec`和对称性`symm`\n"
-"  - `Eq`的的传递性`trans`"
+"  - `Eq`的循环子`Eq.rec`和对称性`Eq.symm`\n"
+"  - `Eq`的的传递性`Eq.trans`\n"
+"- `Iff` 类型\n"
+"  - `Iff`的构造函数`Iff.intro`和定理`Iff.refl`\n"
+"  - `Iff.trans`\n"
+"  - `Iff.of_eq`\n"
+"- `And`类型：\n"
+"  - `And.symm`\n"
+"  - `and_assoc`\n"
+"- `Or`类型：\n"
+"  - `Or`的构造函数`Or.inl`和`Or.inr`和定理`Or.elim`\n"
+"  - `Or.symm`\n"
+"  - `or_assoc`\n"
+"- `Not` 类型\n"
+"  - `True` 类型和 `False` 类型\n"
+"  - `absurd`\n"
+"  - `not_not_intro`"
 msgstr ""
 
 #: Game

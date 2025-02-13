@@ -1,7 +1,7 @@
-import Game.Levels.BasicTypesAndOperations.L04_Inductive
+import Game.Levels.BasicTypesAndOperations
 
-World "BasicTypesAndOperations"
-Level 5
+World "Eq"
+Level 1
 Title "Eq 的构造函数 refl"
 
 
@@ -15,6 +15,9 @@ inductive Eq : {α : Sort u} -> α -> α -> Prop where
 ```
 因为 `Eq.refl` 的类型是一个箭头表达式，所以它是一个函数。它接受一个类型为 `α` 的值 `a`，并返回一个类型为 `Eq a a` 的值。
 我们来使用一下这个构造函数。
+```lean
+constructor Eq.refl.{u} : ∀ {α : Sort u} (a : α), Eq a a
+```
 
 在 lean4 里使用函数的方式和其他变成语言有所不同：
 - 函数名字后面紧跟着参数，比如 `Eq.refl a`，而**不需要用括号包裹**；
@@ -24,11 +27,16 @@ inductive Eq : {α : Sort u} -> α -> α -> Prop where
 
 namespace MyLogic
 
+#print Eq.refl
+
 /--
 请写出一个表达式，它的类型是`{α : Sort u} -> (a : α) -> Eq a a`。
 -/
 Statement : {α : Sort u} -> (a : α) -> Eq a a := by
-  Hint "请尝试构造一个 Lambda 表达式 `fun (xxx : xxx) => xxx`，并且调用 `Eq.refl` 构造函数，不要忘记`exact`关键字。"
+  Hint "
+  - 请尝试构造一个 Lambda 表达式 `fun (xxx : xxx) => xxx`，并且调用 `Eq.refl` 构造函数，不要忘记`exact`关键字。
+  - 你可以输入 `\\` 和 `a`，它们会自动转化成 `α`。
+  "
   Branch
     exact fun {α : Sort u} (a : α) => Eq.refl a
   exact fun {α : Sort u} (a : α) => @Eq.refl α a

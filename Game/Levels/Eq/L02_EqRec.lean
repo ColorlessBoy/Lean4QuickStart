@@ -1,7 +1,7 @@
-import Game.Levels.BasicTypesAndOperations.L05_EqRefl
+import Game.Levels.Eq.L01_EqRefl
 
-World "BasicTypesAndOperations"
-Level 6
+World "Eq"
+Level 2
 Title "Eq 的循环子和对称性"
 
 

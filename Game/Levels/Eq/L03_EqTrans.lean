@@ -1,7 +1,7 @@
-import Game.Levels.BasicTypesAndOperations.L06_EqRec
+import Game.Levels.Eq.L02_EqRec
 
-World "BasicTypesAndOperations"
-Level 7
+World "Eq"
+Level 3
 Title "Eq 的传递性"
 
 namespace MyLogic
@@ -18,9 +18,6 @@ Statement Eq.trans: {α : Sort u} -> {a : α} -> {b : α} -> {c : α} -> Eq a b 
   apply Eq.rec
   Hint "尝试 apply 一个函数 `fun (xxx : xxx) => xxx`。"
   apply fun (h : Eq a c) => h
-
-set_option pp.all true
-#print Eq.trans
 
 Conclusion "
 如果你使用的是 apply 自动补全的 `Eq.rec` 的参数，那么你的证明会非常简洁。

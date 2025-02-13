@@ -1,15 +1,15 @@
-import Game.Levels.BasicTypesAndOperations.L07_EqTrans
+import Game.MyLogic.Or
+import Game.Levels.Iff.L03_IffOfEq
 
 World "Or"
 Level 1
-Title "Or 类型"
+Title "Or.elim"
 
 namespace MyLogic
 
 Introduction
 "
 # Or 类型
-
 在这个关卡里，我们将学习 `Or` 类型在 lean4 中是如何构造的。
 ```lean
 inductive Or (a b : Prop) : Prop where
@@ -36,5 +36,15 @@ Statement Or.elim : {a b c : Prop} -> Or a b -> (a -> c) -> (b -> c) -> c := by
   exact h1 ha
   intro hb h1 h2
   exact h2 hb
+
+/-- Or 类型
+```lean
+inductive Or (a b : Prop) : Prop where
+  | inl : {a b : Prop} -> (h : a) -> Or a b
+  | inr : {a b : Prop} -> (h : b) -> Or a b
+```
+-/
+DefinitionDoc Or as "Or"
+NewDefinition Or
 
 end MyLogic
