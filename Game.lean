@@ -23,7 +23,7 @@ Introduction
   - `Eq`的循环子`Eq.rec`和对称性`Eq.symm`
   - `Eq`的的传递性`Eq.trans`
 - `Iff` 类型
-  - `Iff`的构造函数`Iff.intro`和定理`Iff.refl`
+  - `structure`命令、`Iff`的构造函数`Iff.intro`和定理`Iff.refl`
   - `Iff.trans`
   - `Iff.of_eq`
 - `And`类型：
