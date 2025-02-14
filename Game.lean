@@ -6,7 +6,7 @@ import Game.Levels.Or
 import Game.Levels.Not
 import Game.Levels.Exists
 
-Dependency BasicTypesAndOperations → Iff → And → Or → Not → Exists
+Dependency BasicTypesAndOperations → Eq → Iff → And → Or → Not → Exists
 
 -- Here's what we'll put on the title screen
 Title "Lean4 快速入门"

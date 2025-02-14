@@ -1,5 +1,5 @@
-import Game.Levels.BasicTypesAndOperations.L03_FunctionType
 import Game.MyLogic.Eq
+import Game.Levels.BasicTypesAndOperations.L03_FunctionType
 
 World "BasicTypesAndOperations"
 Level 4

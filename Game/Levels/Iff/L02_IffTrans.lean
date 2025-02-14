@@ -1,4 +1,4 @@
-import Game.Levels.Iff.L01_Iffintro
+import Game.Levels.Iff.L01_IffIntro
 
 World "Iff"
 Level 2

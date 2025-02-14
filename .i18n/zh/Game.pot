@@ -1,7 +1,7 @@
 msgid ""
 msgstr "Project-Id-Version: Game v4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: Fri Feb 14 15:45:15 2025\n"
+"POT-Creation-Date: Fri Feb 14 16:07:12 2025\n"
 "Last-Translator: \n"
 "Language-Team: none\n"
 "Language: zh\n"
@@ -485,6 +485,14 @@ msgid "# Iff 类型\n"
 msgstr ""
 
 #: Game.Levels.Iff.L01_IffIntro
+msgid "Iff 类型\n"
+"```lean\n"
+"inductive Iff : Prop -> Prop -> Prop where\n"
+"  | intro : {a : Prop} -> {b : Prop} -> (a -> b) -> (b -> a) -> Iff a b\n"
+"```"
+msgstr ""
+
+#: Game.Levels.Iff.L01_IffIntro
 msgid "基于 Iff.intro 我们可以证明它的自指性"
 msgstr ""
 
@@ -492,14 +500,6 @@ msgstr ""
 msgid "借助这个证明，我们可以看到 `apply` 的具体细节。\n"
 "- 首先 `Iff.intro` 实际上可以证明 `{a : Prop} -> {a : Prop} -> (a -> a) -> (a -> a) -> Iff a a`；\n"
 "- 观察对比目标命题，`Iff.intro` 包含两个相同的条件 `(a -> a)` 和 `(a -> a)`，`apply`会将这两个条件转化成新的目标。"
-msgstr ""
-
-#: Game.Levels.Iff.L01_IffIntro
-msgid "Iff 类型\n"
-"```lean\n"
-"inductive Iff : Prop -> Prop -> Prop where\n"
-"  | intro : {a : Prop} -> {b : Prop} -> (a -> b) -> (b -> a) -> Iff a b\n"
-"```"
 msgstr ""
 
 #: Game.Levels.Iff.L02_IffTrans
