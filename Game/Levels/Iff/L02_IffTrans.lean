@@ -6,6 +6,11 @@ Title "Iff 的传递性"
 
 namespace MyLogic
 
+/--
+Iff 的传递性
+-/
+TheoremDoc MyLogic.Iff.trans as "Iff.trans" in "Iff"
+
 Statement Iff.trans : {a : Prop} -> {b : Prop} -> {c : Prop} -> Iff a b -> Iff b c -> Iff a c := by
   Hint "你可以先尝试使用 `intro a b c hab hbc`"
   intro a b c hab hbc

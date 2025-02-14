@@ -1,3 +1,6 @@
+import Game.Levels.BasicTypesAndOperations.L01_UniverseType
+import Game.Levels.BasicTypesAndOperations.L02_FunctionAndFunctionType
+import Game.Levels.BasicTypesAndOperations.L03_FunctionType
 import Game.Levels.BasicTypesAndOperations.L04_Inductive
 
 World "BasicTypesAndOperations"

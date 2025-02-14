@@ -25,6 +25,12 @@ recursor Exists.rec.{u} : ∀ {α : Sort u} {p : α → Prop} {motive : Exists p
 "
 
 namespace MyLogic
+
+/--
+Exists.imp
+-/
+TheoremDoc MyLogic.Exists.imp as "Exists.imp" in "Exists"
+
 Statement Exists.imp : {α : Sort u} -> {p q : α -> Prop} -> (∀ (a : α), p a -> q a) -> Exists p -> Exists q := by
   Hint "尝试使用`Exists.rec`转化条件`Exists p`"
   intro α p q hpq

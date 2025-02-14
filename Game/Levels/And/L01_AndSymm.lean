@@ -23,6 +23,11 @@ structure And (a b : Prop) : Prop where
 "
 namespace MyLogic
 
+/--
+`And` 的对称性
+-/
+TheoremDoc MyLogic.And.symm as "And.symm" in "And"
+
 Statement And.symm : {a b : Prop} -> And a b -> And b a := by
   Hint "请使用上述三个函数 `And.intro`, `And.left` 和 `And.right`"
   intro a b hab

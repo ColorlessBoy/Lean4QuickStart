@@ -49,5 +49,23 @@ namespace MyLogic
 /--
 在 lean4 中经常用到的一个公理是 `trivial`，它表示 `True` 就是 `True`。
 -/
+TheoremDoc MyLogic.trivial as "trivial" in "Not"
+
 Statement trivial : True := by
   exact True.intro
+
+/-- True 类型
+```lean
+inductive True : Prop where
+  | intro : True
+```
+-/
+DefinitionDoc True as "True"
+
+/-- False 类型
+```lean
+inductive False : Prop
+```
+-/
+DefinitionDoc False as "False"
+NewDefinition True False

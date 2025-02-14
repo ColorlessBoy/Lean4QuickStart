@@ -9,6 +9,8 @@ namespace MyLogic
 /--
 `Eq` 的传递性，即 `Eq a b -> Eq b c -> Eq a c`。
 -/
+TheoremDoc MyLogic.Eq.trans as "Eq.trans" in "Eq"
+
 Statement Eq.trans: {α : Sort u} -> {a : α} -> {b : α} -> {c : α} -> Eq a b -> Eq b c -> Eq a c := by
   Hint "你需要使用到公理 `Eq.rec`，策略 `intro` 和 `apply`。"
   Branch

@@ -6,6 +6,10 @@ Title "or_assoc"
 
 namespace MyLogic
 
+/--
+Or 的结合律
+-/
+TheoremDoc MyLogic.or_assoc as "or_assoc" in "Or"
 Statement or_assoc: {a b c : Prop} -> Iff (Or (Or a b) c) (Or a (Or b c)) := by
   intro a b c
   apply Iff.intro

@@ -45,6 +45,8 @@ axiom Iff.mpr : {a : Prop} -> {b : Prop} -> Iff a b -> b -> a
 /--
 基于 Iff.intro 我们可以证明它的自指性
 -/
+TheoremDoc MyLogic.Iff.refl as "Iff.refl" in "Iff"
+
 Statement Iff.refl : {a : Prop} -> Iff a a := by
   intro a
   apply Iff.intro

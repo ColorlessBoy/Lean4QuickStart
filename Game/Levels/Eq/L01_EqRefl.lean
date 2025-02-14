@@ -27,11 +27,7 @@ constructor Eq.refl.{u} : ∀ {α : Sort u} (a : α), Eq a a
 
 namespace MyLogic
 
-#print Eq.refl
 
-/--
-请写出一个表达式，它的类型是`{α : Sort u} -> (a : α) -> Eq a a`。
--/
 Statement : {α : Sort u} -> (a : α) -> Eq a a := by
   Hint "
   - 请尝试构造一个 Lambda 表达式 `fun (xxx : xxx) => xxx`，并且调用 `Eq.refl` 构造函数，不要忘记`exact`关键字。
@@ -47,5 +43,5 @@ Conclusion "
 "
 
 /-- `Eq`类型的构造器。 -/
-TheoremDoc Eq.refl as "MyLogic.Eq.refl" in "MyLogic.Eq"
-NewTheorem Eq.refl
+TheoremDoc MyLogic.Eq.refl as "Eq.refl" in "Eq"
+NewTheorem MyLogic.Eq.refl

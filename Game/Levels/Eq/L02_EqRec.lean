@@ -33,6 +33,8 @@ namespace MyLogic
 /--
 `Eq` 的对称性，即 `Eq a b -> Eq b a`。
 -/
+TheoremDoc MyLogic.Eq.symm as "Eq.symm" in "Eq"
+
 Statement Eq.symm : {α : Sort u} -> {a : α} -> {b : α} -> Eq a b -> Eq b a := by
   Hint "请尝试使用 `intro α a` 来转化证明目标，你可以输入 `\\` 和 `a`，来输入 `α`。"
   Branch
@@ -82,5 +84,5 @@ recursor Eq.rec.{u_1, u} : {α : Sort u} →
   {a : α} → {motive : (a_1 : α) → Eq a a_1 → Sort u_1} → motive a (Eq.refl a) → {a_1 : α} → (t : Eq a a_1) → motive a_1 t
 ```
 -/
-TheoremDoc Eq.rec as "MyLogic.Eq.rec" in "MyLogic.Eq"
-NewTheorem Eq.rec
+TheoremDoc MyLogic.Eq.rec as "Eq.rec" in "Eq"
+NewTheorem MyLogic.Eq.rec

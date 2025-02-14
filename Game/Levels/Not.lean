@@ -1,3 +1,5 @@
+import Game.Levels.Not.L01_True
+import Game.Levels.Not.L02_absurd
 import Game.Levels.Not.L03_NotNotIntro
 
 World "Not"

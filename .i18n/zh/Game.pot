@@ -1,7 +1,7 @@
 msgid ""
 msgstr "Project-Id-Version: Game v4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: Thu Feb 13 22:01:05 2025\n"
+"POT-Creation-Date: Fri Feb 14 15:45:15 2025\n"
 "Last-Translator: \n"
 "Language-Team: none\n"
 "Language: zh\n"
@@ -283,10 +283,6 @@ msgid "# Eq 的构造函数 Eq.refl\n"
 msgstr ""
 
 #: Game.Levels.Eq.L01_EqRefl
-msgid "请写出一个表达式，它的类型是`{α : Sort u} -> (a : α) -> Eq a a`。"
-msgstr ""
-
-#: Game.Levels.Eq.L01_EqRefl
 msgid "- 请尝试构造一个 Lambda 表达式 `fun (xxx : xxx) => xxx`，并且调用 `Eq.refl` 构造函数，不要忘记`exact`关键字。\n"
 "- 你可以输入 `\\` 和 `a`，它们会自动转化成 `α`。"
 msgstr ""
@@ -443,8 +439,7 @@ msgid "Eq 类型"
 msgstr ""
 
 #: Game.Levels.Eq
-msgid "# Eq 类型\n"
-"这个章节中，我们将学习 `Eq` 类型在 lean4 中是如何构造的。\n"
+msgid "这个章节中，我们将学习 `Eq` 类型在 lean4 中是如何构造的。\n"
 "`Eq`类型：\n"
 "- `Eq`的构造函数`Eq.refl`\n"
 "- `Eq`的循环子`Eq.rec`和对称性`Eq.symm`\n"
@@ -512,6 +507,10 @@ msgid "Iff 的传递性"
 msgstr ""
 
 #: Game.Levels.Iff.L02_IffTrans
+msgid "Iff 的传递性"
+msgstr ""
+
+#: Game.Levels.Iff.L02_IffTrans
 msgid "你可以先尝试使用 `intro a b c hab hbc`"
 msgstr ""
 
@@ -532,6 +531,10 @@ msgid "Iff与Eq的关系"
 msgstr ""
 
 #: Game.Levels.Iff.L03_IffOfEq
+msgid "Iff 与 Eq 的关系"
+msgstr ""
+
+#: Game.Levels.Iff.L03_IffOfEq
 msgid "你可以尝试使用 `Eq.rec`"
 msgstr ""
 
@@ -543,7 +546,7 @@ msgstr ""
 msgid "# Iff 类型\n"
 "这个章节中，我们将学习 `Iff` 类型在 lean4 中是如何构造的。\n"
 "`Iff` 类型\n"
-"- `Iff`的构造函数`Iff.intro`和定理`Iff.refl`\n"
+"- `structure`命令、`Iff`的构造函数`Iff.intro`和定理`Iff.refl`\n"
 "- `Iff.trans`\n"
 "- `Iff.of_eq`"
 msgstr ""
@@ -568,11 +571,19 @@ msgid "# And 类型\n"
 msgstr ""
 
 #: Game.Levels.And.L01_AndSymm
+msgid "`And` 的对称性"
+msgstr ""
+
+#: Game.Levels.And.L01_AndSymm
 msgid "请使用上述三个函数 `And.intro`, `And.left` 和 `And.right`"
 msgstr ""
 
 #: Game.Levels.And.L02_AndAssoc
 msgid "and_assoc"
+msgstr ""
+
+#: Game.Levels.And.L02_AndAssoc
+msgid "`And` 的结合律"
 msgstr ""
 
 #: Game.Levels.And.L02_AndAssoc
@@ -613,6 +624,10 @@ msgid "# Or 类型\n"
 msgstr ""
 
 #: Game.Levels.Or.L01_OrElim
+msgid "Or 的消去率"
+msgstr ""
+
+#: Game.Levels.Or.L01_OrElim
 msgid "请输入 `intro a b c`"
 msgstr ""
 
@@ -638,11 +653,19 @@ msgid "Or.symm"
 msgstr ""
 
 #: Game.Levels.Or.L02_OrSymm
+msgid "Or 的对称性"
+msgstr ""
+
+#: Game.Levels.Or.L02_OrSymm
 msgid "尝试使用`Or.elim`"
 msgstr ""
 
 #: Game.Levels.Or.L03_OrAssoc
 msgid "or_assoc"
+msgstr ""
+
+#: Game.Levels.Or.L03_OrAssoc
+msgid "Or 的结合律"
 msgstr ""
 
 #: Game.Levels.Or
@@ -705,6 +728,21 @@ msgstr ""
 msgid "在 lean4 中经常用到的一个公理是 `trivial`，它表示 `True` 就是 `True`。"
 msgstr ""
 
+#: Game.Levels.Not.L01_True
+msgid "True 类型\n"
+"```lean\n"
+"inductive True : Prop where\n"
+"  | intro : True\n"
+"```"
+msgstr ""
+
+#: Game.Levels.Not.L01_True
+msgid "False 类型\n"
+"```lean\n"
+"inductive False : Prop\n"
+"```"
+msgstr ""
+
 #: Game.Levels.Not.L02_absurd
 msgid "absurd"
 msgstr ""
@@ -727,8 +765,23 @@ msgid "# Not 类型\n"
 "lean4 可能无法推测 `False.rec` 需要用到的 motive 函数，你可以使用 `apply @False.rec fun (xxx : xxx) => xxx` 显式传入 motive 函数。"
 msgstr ""
 
+#: Game.Levels.Not.L02_absurd
+msgid "荒谬定理"
+msgstr ""
+
+#: Game.Levels.Not.L02_absurd
+msgid "Not 类型\n"
+"```lean\n"
+"def Not (a : Prop) : Prop := a -> False\n"
+"```"
+msgstr ""
+
 #: Game.Levels.Not.L03_NotNotIntro
 msgid "not_not_intro"
+msgstr ""
+
+#: Game.Levels.Not.L03_NotNotIntro
+msgid "双重否定"
 msgstr ""
 
 #: Game.Levels.Not.L03_NotNotIntro
@@ -771,6 +824,10 @@ msgid "# Exists 类型\n"
 msgstr ""
 
 #: Game.Levels.Exists.L01_Exists
+msgid "Exists.imp"
+msgstr ""
+
+#: Game.Levels.Exists.L01_Exists
 msgid "尝试使用`Exists.rec`转化条件`Exists p`"
 msgstr ""
 
@@ -805,8 +862,10 @@ msgid "# Lean4 快速入门\n"
 "  - `Eq`的构造函数`Eq.refl`\n"
 "  - `Eq`的循环子`Eq.rec`和对称性`Eq.symm`\n"
 "  - `Eq`的的传递性`Eq.trans`\n"
+"  - `Eq.mp`\n"
+"  - `Eq.mpr`\n"
 "- `Iff` 类型\n"
-"  - `Iff`的构造函数`Iff.intro`和定理`Iff.refl`\n"
+"  - `structure`命令、`Iff`的构造函数`Iff.intro`和定理`Iff.refl`\n"
 "  - `Iff.trans`\n"
 "  - `Iff.of_eq`\n"
 "- `And`类型：\n"
@@ -819,7 +878,9 @@ msgid "# Lean4 快速入门\n"
 "- `Not` 类型\n"
 "  - `True` 类型和 `False` 类型\n"
 "  - `absurd`\n"
-"  - `not_not_intro`"
+"  - `not_not_intro`\n"
+"- `Exists` 类型\n"
+"  - `Exists.imp`"
 msgstr ""
 
 #: Game

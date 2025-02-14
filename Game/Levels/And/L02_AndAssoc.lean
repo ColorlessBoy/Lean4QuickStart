@@ -7,6 +7,10 @@ Title "and_assoc"
 
 namespace MyLogic
 
+/--
+`And` 的结合律
+-/
+TheoremDoc MyLogic.and_assoc as "and_assoc" in "And"
 Statement and_assoc : {a b c : Prop} -> Iff (And (And a b) c) (And a (And b c)) := by
   Hint "如果一个表达式是 `h : And a b`，我们可以将 `And.left h` 简化为 `h.left`。"
   intro a b c

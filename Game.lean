@@ -6,6 +6,8 @@ import Game.Levels.Or
 import Game.Levels.Not
 import Game.Levels.Exists
 
+Dependency BasicTypesAndOperations → Iff → And → Or → Not → Exists
+
 -- Here's what we'll put on the title screen
 Title "Lean4 快速入门"
 Introduction
@@ -22,6 +24,8 @@ Introduction
   - `Eq`的构造函数`Eq.refl`
   - `Eq`的循环子`Eq.rec`和对称性`Eq.symm`
   - `Eq`的的传递性`Eq.trans`
+  - `Eq.mp`
+  - `Eq.mpr`
 - `Iff` 类型
   - `structure`命令、`Iff`的构造函数`Iff.intro`和定理`Iff.refl`
   - `Iff.trans`
@@ -37,6 +41,8 @@ Introduction
   - `True` 类型和 `False` 类型
   - `absurd`
   - `not_not_intro`
+- `Exists` 类型
+  - `Exists.imp`
 "
 
 Info "

@@ -1,3 +1,7 @@
+import Game.Levels.Eq.L01_EqRefl
+import Game.Levels.Eq.L02_EqRec
+import Game.Levels.Eq.L03_EqTrans
+import Game.Levels.Eq.L04_EqMp
 import Game.Levels.Eq.L05_EqMpr
 
 
@@ -6,7 +10,6 @@ Title "Eq 类型"
 
 Introduction
 "
-# Eq 类型
 这个章节中，我们将学习 `Eq` 类型在 lean4 中是如何构造的。
 `Eq`类型：
 - `Eq`的构造函数`Eq.refl`

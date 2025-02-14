@@ -75,5 +75,3 @@ inductive Eq : α → α → Prop where
 -/
 DefinitionDoc Eq as "Eq"
 NewDefinition Eq
-
-TheoremTab "MyLogic.Eq"

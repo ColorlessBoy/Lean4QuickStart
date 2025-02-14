@@ -25,6 +25,10 @@ recursor Or.rec : ∀ {a b : Prop} {motive : Or a b → Prop},
 ```
 `Or.rec` 函数表示，我们可以证明某个命题在条件 `ha : a` 和 `hb : b` 下都成立，那么 `h: Or a b` 下则成立。
 "
+/--
+Or 的消去率
+-/
+TheoremDoc MyLogic.Or.elim as "Or.elim" in "elim"
 
 Statement Or.elim : {a b c : Prop} -> Or a b -> (a -> c) -> (b -> c) -> c := by
   Hint "请输入 `intro a b c` "
