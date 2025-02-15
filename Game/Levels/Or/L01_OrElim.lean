@@ -28,7 +28,7 @@ recursor Or.rec : ∀ {a b : Prop} {motive : Or a b → Prop},
 /--
 Or 的消去率
 -/
-TheoremDoc MyLogic.Or.elim as "Or.elim" in "elim"
+TheoremDoc MyLogic.Or.elim as "Or.elim" in "Or"
 
 Statement Or.elim : {a b c : Prop} -> Or a b -> (a -> c) -> (b -> c) -> c := by
   Hint "请输入 `intro a b c` "
