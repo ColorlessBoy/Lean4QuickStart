@@ -1,4 +1,4 @@
-import Game.Levels.BasicTypesAndOperations
+import Game.Levels.Basic.L04_Inductive
 
 World "Eq"
 Level 1
@@ -42,6 +42,4 @@ Conclusion "
 - 或者显式传入隐式参数 `exact fun {α : Sort u} (a : α) => @Eq.refl α a`。
 "
 
-/-- `Eq`类型的构造器。 -/
-TheoremDoc MyLogic.Eq.refl as "Eq.refl" in "Eq"
-NewTheorem MyLogic.Eq.refl
+end MyLogic

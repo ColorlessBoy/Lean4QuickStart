@@ -28,3 +28,5 @@ Conclusion "
 - 我们也无法证明 `(p: Prop) -> Not (Not p) -> p`；
 - 更深刻的是：排中律在这里并不是天然存在的公理。
 "
+
+end MyLogic

@@ -1,7 +1,6 @@
-import Game.MyLogic.Eq
-import Game.Levels.BasicTypesAndOperations.L03_FunctionType
+import Game.Levels.Basic.L03_FunctionType
 
-World "BasicTypesAndOperations"
+World "Basic"
 Level 4
 Title "归纳类型"
 
@@ -54,6 +53,11 @@ lean4中类似的语法糖非常多，主要是为了方便书写和阅读，大
 
 namespace MyLogic
 
+universe u
+
+inductive Eq : {α : Sort u} -> α -> α -> Prop where
+  | refl : (a : α) -> Eq a a
+
 /--
 请写出一个表达式，它的类型是`{α : Sort u} -> α -> α -> Prop`。
 -/
@@ -73,5 +77,12 @@ inductive Eq : α → α → Prop where
   | refl (a : α) : Eq a a
 ```
 -/
-DefinitionDoc Eq as "Eq"
-NewDefinition Eq
+DefinitionDoc MyLogic.Eq as "Eq"
+NewDefinition MyLogic.Eq
+/-- `Eq.refl` -/
+TheoremDoc MyLogic.Eq.refl as "Eq.refl" in "Eq"
+/-- `Eq.rec` -/
+TheoremDoc MyLogic.Eq.rec as "Eq.rec" in "Eq"
+NewTheorem MyLogic.Eq.refl MyLogic.Eq.rec
+
+end MyLogic

@@ -1,8 +1,8 @@
 import Game.Metadata
 
-World "BasicTypesAndOperations"
+World "Basic"
 Level 1
-Title "凡事皆有类型和宇宙类型"
+Title "宇宙类型"
 
 Introduction "
 # 凡事皆有类型
@@ -61,3 +61,5 @@ Conclusion "
 -/
 TacticDoc exact
 NewTactic exact
+
+end MyLogic

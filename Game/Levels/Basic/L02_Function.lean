@@ -1,6 +1,6 @@
-import Game.Levels.BasicTypesAndOperations.L01_UniverseType
+import Game.Levels.Basic.L01_UniverseType
 
-World "BasicTypesAndOperations"
+World "Basic"
 Level 2
 Title "函数"
 
@@ -41,3 +41,5 @@ Conclusion "
 - **函数**在lean4里用 `fun (ArgTerm : ArgType) => BodyTerm` 表示；
 - **函数类型**在lean4里用 `(ArgType : ArgType) -> BodyType` 表示，其中 `BodyTerm:BodyType`。
 "
+
+end MyLogic

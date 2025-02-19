@@ -17,4 +17,4 @@ Statement Iff.of_eq: {a : Prop} -> {b : Prop} -> Eq a b -> Iff a b := by
   apply Eq.rec
   apply Iff.refl
 
-namespace MyLogic
+end MyLogic

@@ -19,3 +19,5 @@ Statement and_assoc : {a b c : Prop} -> Iff (And (And a b) c) (And a (And b c)) 
   apply And.intro habc.left.left (And.intro habc.left.right habc.right)
   intro habc
   apply And.intro (And.intro habc.left habc.right.left) habc.right.right
+
+end MyLogic

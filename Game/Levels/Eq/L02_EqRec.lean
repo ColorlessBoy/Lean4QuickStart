@@ -78,11 +78,4 @@ TacticDoc apply
 
 NewTactic intro apply
 
-/-- `Eq`类型的循环子 `Eq.rec`
-```lean
-recursor Eq.rec.{u_1, u} : {α : Sort u} →
-  {a : α} → {motive : (a_1 : α) → Eq a a_1 → Sort u_1} → motive a (Eq.refl a) → {a_1 : α} → (t : Eq a a_1) → motive a_1 t
-```
--/
-TheoremDoc MyLogic.Eq.rec as "Eq.rec" in "Eq"
-NewTheorem MyLogic.Eq.rec
+end MyLogic

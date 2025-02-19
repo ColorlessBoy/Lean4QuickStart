@@ -21,4 +21,4 @@ Statement Iff.trans : {a : Prop} -> {b : Prop} -> {c : Prop} -> Iff a b -> Iff b
   Hint "你可以先尝试构造一个函数 `fun (xxx : xxx) => xxx`，并且使用 `Iff.mpr`"
   exact fun hc => Iff.mpr hab (Iff.mpr hbc hc)
 
-namespace MyLogic
+end MyLogic

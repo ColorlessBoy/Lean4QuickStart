@@ -1,11 +1,8 @@
-import Game.MyLogic.Iff
 import Game.Levels.Eq.L05_EqMpr
 
 World "Iff"
 Level 1
 Title "Iff 类型"
-
-namespace MyLogic
 
 Introduction
 "
@@ -42,14 +39,12 @@ axiom Iff.mpr : {a : Prop} -> {b : Prop} -> Iff a b -> b -> a
 当然，lean4 也会自动生成公理 `Iff.rec`，就这个类型而言用处不大，我们就不展开讲了。
 "
 
-/-- Iff 类型
-```lean
-inductive Iff : Prop -> Prop -> Prop where
-  | intro : {a : Prop} -> {b : Prop} -> (a -> b) -> (b -> a) -> Iff a b
-```
--/
-DefinitionDoc Iff as "Iff"
-NewDefinition Iff
+namespace MyLogic
+
+structure Iff (a b : Prop) : Prop where
+  intro ::
+  mp : a -> b
+  mpr : b -> a
 
 /--
 基于 Iff.intro 我们可以证明它的自指性
@@ -67,3 +62,22 @@ Conclusion "
 - 首先 `Iff.intro` 实际上可以证明 `{a : Prop} -> {a : Prop} -> (a -> a) -> (a -> a) -> Iff a a`；
 - 观察对比目标命题，`Iff.intro` 包含两个相同的条件 `(a -> a)` 和 `(a -> a)`，`apply`会将这两个条件转化成新的目标。
 "
+
+/-- Iff 类型
+```lean
+inductive Iff : Prop -> Prop -> Prop where
+  | intro : {a : Prop} -> {b : Prop} -> (a -> b) -> (b -> a) -> Iff a b
+```
+-/
+DefinitionDoc MyLogic.Iff as "Iff"
+NewDefinition MyLogic.Iff
+
+/-- Iff.intro -/
+TheoremDoc MyLogic.Iff.intro as "Iff.intro" in "Iff"
+/-- Iff.mp -/
+TheoremDoc MyLogic.Iff.mp as "Iff.mp" in "Iff"
+/-- Iff.mpr -/
+TheoremDoc MyLogic.Iff.mpr as "Iff.mpr" in "Iff"
+NewTheorem MyLogic.Iff.intro MyLogic.Iff.mp MyLogic.Iff.mpr
+
+end MyLogic

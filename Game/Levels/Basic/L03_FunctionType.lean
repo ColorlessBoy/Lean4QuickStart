@@ -1,6 +1,6 @@
-import Game.Levels.BasicTypesAndOperations.L02_FunctionAndFunctionType
+import Game.Levels.Basic.L02_Function
 
-World "BasicTypesAndOperations"
+World "Basic"
 Level 3
 Title "函数类型"
 
@@ -67,3 +67,5 @@ Conclusion "
 - `imax` 是 Lean4 内置的一个条件最值函数：当 `v = 0` 时 `imax u v = 0`；当 `v != 0` 时 `imax u v = max u v`；
 -  `max` 是 Lean4 内置的函数，表示取 `u` 和 `v` 中最大值。
 "
+
+end MyLogic

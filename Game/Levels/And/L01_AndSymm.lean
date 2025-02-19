@@ -1,4 +1,3 @@
-import Game.MyLogic.And
 import Game.Levels.Iff.L03_IffOfEq
 
 
@@ -23,6 +22,11 @@ structure And (a b : Prop) : Prop where
 "
 namespace MyLogic
 
+structure And (a b : Prop) : Prop where
+  intro ::
+  left : a
+  right : b
+
 /--
 `And` 的对称性
 -/
@@ -34,3 +38,23 @@ Statement And.symm : {a b : Prop} -> And a b -> And b a := by
   apply And.intro
   exact And.right hab
   exact And.left hab
+
+/-- And 类型
+```lean
+structure And (a b : Prop) : Prop where
+  intro ::
+  left : a
+  right : b
+```
+-/
+DefinitionDoc MyLogic.And as "And"
+NewDefinition MyLogic.And
+/-- `And.intro` -/
+TheoremDoc MyLogic.And.intro as "And.intro" in "And"
+/-- `And.left` -/
+TheoremDoc MyLogic.And.left as "And.left" in "And"
+/-- `And.right` -/
+TheoremDoc MyLogic.And.right as "And.right" in "And"
+NewTheorem MyLogic.And.intro MyLogic.And.left MyLogic.And.right
+
+end MyLogic

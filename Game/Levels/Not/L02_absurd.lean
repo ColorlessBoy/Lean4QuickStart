@@ -24,6 +24,8 @@ lean4 可能无法推测 `False.rec` 需要用到的 motive 函数，你可以�
 "
 namespace MyLogic
 
+def Not (a : Prop) : Prop := a → False
+
 /--
 荒谬定理
 -/
@@ -39,5 +41,6 @@ Statement absurd : {a : Prop} -> {b : Sort u} -> a -> Not a -> b := by
 def Not (a : Prop) : Prop := a -> False
 ```
 -/
-DefinitionDoc Not as "Not"
-NewDefinition Not
+DefinitionDoc MyLogic.Not as "Not"
+NewDefinition MyLogic.Not
+end MyLogic

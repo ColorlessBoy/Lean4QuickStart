@@ -27,3 +27,5 @@ Statement or_assoc: {a b c : Prop} -> Iff (Or (Or a b) c) (Or a (Or b c)) := by
   intro hb
   apply Or.inl (Or.inr hb)
   exact Or.inr
+
+end MyLogic

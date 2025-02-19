@@ -1,7 +1,7 @@
 msgid ""
 msgstr "Project-Id-Version: Game v4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: Sat Feb 15 22:49:32 2025\n"
+"POT-Creation-Date: Wed Feb 19 10:38:10 2025\n"
 "Last-Translator: \n"
 "Language-Team: none\n"
 "Language: zh\n"
@@ -9,7 +9,7 @@ msgstr "Project-Id-Version: Game v4.7.0\n"
 "Content-Transfer-Encoding: 8bit"
 
 #: GameServer.RpcHandlers
-msgid "level completed! 🎉"
+msgid "Level completed! 🎉"
 msgstr ""
 
 #: GameServer.RpcHandlers
@@ -20,11 +20,11 @@ msgstr ""
 msgid "intermediate goal solved! 🎉"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L01_UniverseType
-msgid "凡事皆有类型和宇宙类型"
+#: Game.Levels.Basic.L01_UniverseType
+msgid "宇宙类型"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L01_UniverseType
+#: Game.Levels.Basic.L01_UniverseType
 msgid "# 凡事皆有类型\n"
 "类型论基本原则——*凡事皆有类型 (Every term has a type)* 。任何一个依赖类型论语言需要一些内置的类型作为它的基本元素，因为如果没有类型，那就没有事物。在 Lean4 里，事物称为 `Term`，类型称为 `Type`。\n"
 "\n"
@@ -56,30 +56,30 @@ msgid "# 凡事皆有类型\n"
 "```"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L01_UniverseType
+#: Game.Levels.Basic.L01_UniverseType
 msgid "请写出一个表达式，它的类型是`Sort 1`。"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L01_UniverseType
+#: Game.Levels.Basic.L01_UniverseType
 msgid "提示：你可以尝试写下`exact Sort 0`，`exact Sort`或者`exact Prop`."
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L01_UniverseType
+#: Game.Levels.Basic.L01_UniverseType
 msgid "总结：\n"
 "- `Sort 0`的类型是`Sort 1`；\n"
 "- `Sort`和`Prop`是`Sort 0`的别名；\n"
 "- `Type`是`Sort 1`的别名。"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L01_UniverseType
+#: Game.Levels.Basic.L01_UniverseType
 msgid "可以使用 `exact` 将一个表达式应用到目标上，如果表达式的类型和目标相同，则表示证明完成。"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L02_FunctionAndFunctionType
+#: Game.Levels.Basic.L02_Function
 msgid "函数"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L02_FunctionAndFunctionType
+#: Game.Levels.Basic.L02_Function
 msgid "# 函数\n"
 "**函数**是一种内置的 `Term` ，也叫做 Lambda 表达式。Lean4 规定 Lambda 表达式的构造语法是 `fun (ArgTerm : ArgType) => BodyTerm` ，例如：`fun (a : Prop) => a` 。Lambda 表达式的简化语法是 `ArgTerm => BodyTerm`，例如 `fun a => a`。\n"
 "\n"
@@ -93,28 +93,28 @@ msgid "# 函数\n"
 "```"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L02_FunctionAndFunctionType
+#: Game.Levels.Basic.L02_Function
 msgid "请写出一个**函数**表达式，它的类型是`Prop -> Prop -> Prop`。(箭头是右结合的)"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L02_FunctionAndFunctionType
+#: Game.Levels.Basic.L02_Function
 msgid "提示：\n"
 "- 你可以尝试写下`exact fun (a : Prop) => fun (b : Prop) => a`；\n"
 "- 函数体没有使用到的参数名字推荐用`_`代替，所以等价表达式为`exact fun (a : Prop) => fun (_ : Prop) => a`；\n"
 "- 嵌套的函数中间的`fun => `可以省略，所以等价表达式为`exact fun (a : Prop) (_ : Prop) => a`。"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L02_FunctionAndFunctionType
+#: Game.Levels.Basic.L02_Function
 msgid "总结：\n"
 "- **函数**在lean4里用 `fun (ArgTerm : ArgType) => BodyTerm` 表示；\n"
 "- **函数类型**在lean4里用 `(ArgType : ArgType) -> BodyType` 表示，其中 `BodyTerm:BodyType`。"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L03_FunctionType
+#: Game.Levels.Basic.L03_FunctionType
 msgid "函数类型"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L03_FunctionType
+#: Game.Levels.Basic.L03_FunctionType
 msgid "# 函数类型\n"
 "*凡事皆有类型*，箭头表达式也应该有类型。Lean4 规定 `(ArgTerm : ArgType) -> BodyType` 的类型是 `Sort (imax u v)` ，其中：\n"
 "- `ArgType : Sort u`；\n"
@@ -155,16 +155,16 @@ msgid "# 函数类型\n"
 "*凡事皆有类型*，宇宙层级不是一个 `Term`，它没有类型。"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L03_FunctionType
+#: Game.Levels.Basic.L03_FunctionType
 msgid "请写出一个**函数类型**表达式，它的类型是`Sort (imax (u + 1) (v + 1) u)`。\n"
 "- 游戏引擎已经提前声明了宇宙层级`u v`，你可以直接使用。"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L03_FunctionType
+#: Game.Levels.Basic.L03_FunctionType
 msgid "提示：你可以尝试写下`exact (a : Sort u) -> Sort v -> a`"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L03_FunctionType
+#: Game.Levels.Basic.L03_FunctionType
 msgid "总结：\n"
 "- **函数**在lean4里用 `fun (ArgTerm : ArgType) => BodyTerm` 表示；\n"
 "- **函数类型**在lean4里用 `(ArgType : ArgType) -> BodyType` 表示，其中 `BodyTerm:BodyType`。\n"
@@ -173,11 +173,11 @@ msgid "总结：\n"
 "-  `max` 是 Lean4 内置的函数，表示取 `u` 和 `v` 中最大值。"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L04_Inductive
+#: Game.Levels.Basic.L04_Inductive
 msgid "归纳类型"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L04_Inductive
+#: Game.Levels.Basic.L04_Inductive
 msgid "# 归纳类型\n"
 "在前面，我们见到了 Lean4 里的一些基本类型：宇宙类型`Prop, Type 0, Type 1, Type2 ...`，函数以及函数类型。但是，这些类型表达能力还是太弱了。为了描述更具体的事物，我们需要定义新的类型。\n"
 "\n"
@@ -222,21 +222,21 @@ msgid "# 归纳类型\n"
 "在编辑器输入`∖forall`可以得到全称量词符号`∀`，输入`∖to`可以得到箭头符号`→`。"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L04_Inductive
+#: Game.Levels.Basic.L04_Inductive
 msgid "请写出一个表达式，它的类型是`{α : Sort u} -> α -> α -> Prop`。"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L04_Inductive
+#: Game.Levels.Basic.L04_Inductive
 msgid "请尝试输入 `exact Eq`"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L04_Inductive
+#: Game.Levels.Basic.L04_Inductive
 msgid "总结：\n"
 "- 我们可以用 `inductive` 命令来定义新的类型；\n"
 "- `inductive` 绑定一个名字到某个指定的类型，同时生成了一系列的函数作为这个新类型的公理。"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations.L04_Inductive
+#: Game.Levels.Basic.L04_Inductive
 msgid "等价关系 `Eq a b`\n"
 "```lean\n"
 "inductive Eq : α → α → Prop where\n"
@@ -244,19 +244,16 @@ msgid "等价关系 `Eq a b`\n"
 "```"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations
-msgid "基本类型和操作"
+#: Game.Levels.Basic.L04_Inductive
+msgid "`Eq.refl`"
 msgstr ""
 
-#: Game.Levels.BasicTypesAndOperations
-msgid "欢迎来到 Lean4 的快速入门教程的第一章节！\n"
-"在这一章节，我们将学习 Lean4 的基本类型和操作。\n"
-"这些概念是 Lean4 的构建基石。\n"
-"具体包括：\n"
-"- 凡事皆有类型和宇宙类型\n"
-"- 函数`fun (xxx : xxx) => xxx`\n"
-"- 函数类型`(xxx : xxx) -> xxx`\n"
-"- 归纳类型`inductive`"
+#: Game.Levels.Basic.L04_Inductive
+msgid "`Eq.rec`"
+msgstr ""
+
+#: Game.Levels.Basic
+msgid "基本类型"
 msgstr ""
 
 #: Game.Levels.Eq.L01_EqRefl
@@ -290,10 +287,6 @@ msgstr ""
 #: Game.Levels.Eq.L01_EqRefl
 msgid "- 你可以使用 `exact fun {α : Sort u} (a : α) => Eq.refl a`；\n"
 "- 或者显式传入隐式参数 `exact fun {α : Sort u} (a : α) => @Eq.refl α a`。"
-msgstr ""
-
-#: Game.Levels.Eq.L01_EqRefl
-msgid "`Eq`类型的构造器。"
 msgstr ""
 
 #: Game.Levels.Eq.L02_EqRec
@@ -368,14 +361,6 @@ msgid "如果当前目标是证明 `Q`，并且存在一个证明 `t : P -> Q`�
 "本质上，`apply` 也是一个语法树转化函数，它会等待用户输入 `P` 的证明 `p`，然后构建出 `t p` 这个表达式，而这个表达式的类型就是 `Q`。"
 msgstr ""
 
-#: Game.Levels.Eq.L02_EqRec
-msgid "`Eq`类型的循环子 `Eq.rec`\n"
-"```lean\n"
-"recursor Eq.rec.{u_1, u} : {α : Sort u} →\n"
-"  {a : α} → {motive : (a_1 : α) → Eq a a_1 → Sort u_1} → motive a (Eq.refl a) → {a_1 : α} → (t : Eq a a_1) → motive a_1 t\n"
-"```"
-msgstr ""
-
 #: Game.Levels.Eq.L03_EqTrans
 msgid "Eq 的传递性"
 msgstr ""
@@ -438,14 +423,6 @@ msgstr ""
 msgid "Eq 类型"
 msgstr ""
 
-#: Game.Levels.Eq
-msgid "这个章节中，我们将学习 `Eq` 类型在 lean4 中是如何构造的。\n"
-"`Eq`类型：\n"
-"- `Eq`的构造函数`Eq.refl`\n"
-"- `Eq`的循环子`Eq.rec`和对称性`Eq.symm`\n"
-"- `Eq`的的传递性`Eq.trans`"
-msgstr ""
-
 #: Game.Levels.Iff.L01_IffIntro
 msgid "Iff 类型"
 msgstr ""
@@ -485,6 +462,16 @@ msgid "# Iff 类型\n"
 msgstr ""
 
 #: Game.Levels.Iff.L01_IffIntro
+msgid "基于 Iff.intro 我们可以证明它的自指性"
+msgstr ""
+
+#: Game.Levels.Iff.L01_IffIntro
+msgid "借助这个证明，我们可以看到 `apply` 的具体细节。\n"
+"- 首先 `Iff.intro` 实际上可以证明 `{a : Prop} -> {a : Prop} -> (a -> a) -> (a -> a) -> Iff a a`；\n"
+"- 观察对比目标命题，`Iff.intro` 包含两个相同的条件 `(a -> a)` 和 `(a -> a)`，`apply`会将这两个条件转化成新的目标。"
+msgstr ""
+
+#: Game.Levels.Iff.L01_IffIntro
 msgid "Iff 类型\n"
 "```lean\n"
 "inductive Iff : Prop -> Prop -> Prop where\n"
@@ -493,13 +480,15 @@ msgid "Iff 类型\n"
 msgstr ""
 
 #: Game.Levels.Iff.L01_IffIntro
-msgid "基于 Iff.intro 我们可以证明它的自指性"
+msgid "Iff.intro"
 msgstr ""
 
 #: Game.Levels.Iff.L01_IffIntro
-msgid "借助这个证明，我们可以看到 `apply` 的具体细节。\n"
-"- 首先 `Iff.intro` 实际上可以证明 `{a : Prop} -> {a : Prop} -> (a -> a) -> (a -> a) -> Iff a a`；\n"
-"- 观察对比目标命题，`Iff.intro` 包含两个相同的条件 `(a -> a)` 和 `(a -> a)`，`apply`会将这两个条件转化成新的目标。"
+msgid "Iff.mp"
+msgstr ""
+
+#: Game.Levels.Iff.L01_IffIntro
+msgid "Iff.mpr"
 msgstr ""
 
 #: Game.Levels.Iff.L02_IffTrans
@@ -542,15 +531,6 @@ msgstr ""
 msgid "Iff 类型"
 msgstr ""
 
-#: Game.Levels.Iff
-msgid "# Iff 类型\n"
-"这个章节中，我们将学习 `Iff` 类型在 lean4 中是如何构造的。\n"
-"`Iff` 类型\n"
-"- `structure`命令、`Iff`的构造函数`Iff.intro`和定理`Iff.refl`\n"
-"- `Iff.trans`\n"
-"- `Iff.of_eq`"
-msgstr ""
-
 #: Game.Levels.And.L01_AndSymm
 msgid "And.symm"
 msgstr ""
@@ -578,6 +558,28 @@ msgstr ""
 msgid "请使用上述三个函数 `And.intro`, `And.left` 和 `And.right`"
 msgstr ""
 
+#: Game.Levels.And.L01_AndSymm
+msgid "And 类型\n"
+"```lean\n"
+"structure And (a b : Prop) : Prop where\n"
+"  intro ::\n"
+"  left : a\n"
+"  right : b\n"
+"```"
+msgstr ""
+
+#: Game.Levels.And.L01_AndSymm
+msgid "`And.intro`"
+msgstr ""
+
+#: Game.Levels.And.L01_AndSymm
+msgid "`And.left`"
+msgstr ""
+
+#: Game.Levels.And.L01_AndSymm
+msgid "`And.right`"
+msgstr ""
+
 #: Game.Levels.And.L02_AndAssoc
 msgid "and_assoc"
 msgstr ""
@@ -592,13 +594,6 @@ msgstr ""
 
 #: Game.Levels.And
 msgid "And 类型"
-msgstr ""
-
-#: Game.Levels.And
-msgid "# And 类型\n"
-"`And`类型：\n"
-"- `And.symm`\n"
-"- `and_assoc`"
 msgstr ""
 
 #: Game.Levels.Or.L01_OrElim
@@ -648,6 +643,18 @@ msgid "Or 类型\n"
 "```"
 msgstr ""
 
+#: Game.Levels.Or.L01_OrElim
+msgid "Or.inl"
+msgstr ""
+
+#: Game.Levels.Or.L01_OrElim
+msgid "Or.inr"
+msgstr ""
+
+#: Game.Levels.Or.L01_OrElim
+msgid "Or.rec"
+msgstr ""
+
 #: Game.Levels.Or.L02_OrSymm
 msgid "Or.symm"
 msgstr ""
@@ -670,15 +677,6 @@ msgstr ""
 
 #: Game.Levels.Or
 msgid "Or 类型"
-msgstr ""
-
-#: Game.Levels.Or
-msgid "# Or 类型\n"
-"这个章节中，我们将学习 `Or` 类型在 lean4 中是如何构造的。\n"
-"`Or`类型：\n"
-"- `Or`的构造函数`Or.inl`和`Or.inr`和定理`Or.elim`\n"
-"- `Or.symm`\n"
-"- `or_assoc`"
 msgstr ""
 
 #: Game.Levels.Not.L01_True
@@ -743,6 +741,14 @@ msgid "False 类型\n"
 "```"
 msgstr ""
 
+#: Game.Levels.Not.L01_True
+msgid "`True.intro`"
+msgstr ""
+
+#: Game.Levels.Not.L01_True
+msgid "`False.rec`"
+msgstr ""
+
 #: Game.Levels.Not.L02_absurd
 msgid "absurd"
 msgstr ""
@@ -788,17 +794,48 @@ msgstr ""
 msgid "`Not (Not p)` 等价于 `p -> False -> False`"
 msgstr ""
 
-#: Game.Levels.Not
-msgid "Not 类型"
+#: Game.Levels.Not.L03_NotNotIntro
+msgid "- 这里涉及到一个非常深刻的概念，我们也无法证明 `(p: Prop) -> Not (Not p) -> p`；\n"
+"- 更深刻的是：排中律在这里并不是天然存在的公理。"
+msgstr ""
+
+#: Game.Levels.Not.L04_NotNotEm
+msgid "not_not_em"
+msgstr ""
+
+#: Game.Levels.Not.L04_NotNotEm
+msgid "双重否定"
+msgstr ""
+
+#: Game.Levels.Not.L04_NotNotEm
+msgid "这道题目会比较困难，需要巧妙的构造"
+msgstr ""
+
+#: Game.Levels.Not.L04_NotNotEm
+msgid "`intro h`"
+msgstr ""
+
+#: Game.Levels.Not.L04_NotNotEm
+msgid "`apply h`"
+msgstr ""
+
+#: Game.Levels.Not.L04_NotNotEm
+msgid "`apply Or.inr`"
+msgstr ""
+
+#: Game.Levels.Not.L04_NotNotEm
+msgid "`apply fun (ha : a) => h (Or.inl ha)`"
+msgstr ""
+
+#: Game.Levels.Not.L04_NotNotEm
+msgid "- 这道题目很困难；\n"
+"- 这里涉及到一个非常深刻的概念，我们可以直接证明`(a : Prop) -> Not (Not (Or a (Not a)))`，但是无法证明`(a : Prop) -> Or a (Not a)`；\n"
+"- 我们也无法证明 `(p: Prop) -> Not (Not p) -> p`；\n"
+"- 更深刻的是：排中律在这里并不是天然存在的公理。"
 msgstr ""
 
 #: Game.Levels.Not
-msgid "# Not 类型\n"
-"这个章节中，我们将学习 `Not` 类型在 lean4 中是如何构造的。\n"
-"`Not` 类型\n"
-"- `True` 类型和 `False` 类型\n"
-"- `absurd`\n"
-"- `not_not_intro`"
+msgid "Not 类型"
 msgstr ""
 
 #: Game.Levels.Exists.L01_Exists
@@ -835,14 +872,24 @@ msgstr ""
 msgid "尝试使用`Exists.intro`转化目标`Exists q`"
 msgstr ""
 
-#: Game.Levels.Exists
-msgid "Exists 类型"
+#: Game.Levels.Exists.L01_Exists
+msgid "Exists 类型\n"
+"```lean\n"
+"inductive Exists {α : Sort u} (p : α → Prop) : Prop where\n"
+"  | intro (w : α) (h : p w) : Exists p\n"
+"```"
+msgstr ""
+
+#: Game.Levels.Exists.L01_Exists
+msgid "Exists.intro"
+msgstr ""
+
+#: Game.Levels.Exists.L01_Exists
+msgid "Exists.rec"
 msgstr ""
 
 #: Game.Levels.Exists
-msgid "# Exists 类型\n"
-"`Exists` 类型\n"
-"- `Exists.imp`"
+msgid "Exists 类型"
 msgstr ""
 
 #: Game
@@ -850,37 +897,7 @@ msgid "Lean4 快速入门"
 msgstr ""
 
 #: Game
-msgid "# Lean4 快速入门\n"
-"\n"
-"## 目录\n"
-"- 基本类型与操作\n"
-"  - 凡事皆有类型和宇宙类型\n"
-"  - 函数`fun (xxx : xxx) => xxx`\n"
-"  - 函数类型`(xxx : xxx) -> xxx`\n"
-"  - 归纳类型`inductive`\n"
-"- `Eq` 类型\n"
-"  - `Eq`的构造函数`Eq.refl`\n"
-"  - `Eq`的循环子`Eq.rec`和对称性`Eq.symm`\n"
-"  - `Eq`的的传递性`Eq.trans`\n"
-"  - `Eq.mp`\n"
-"  - `Eq.mpr`\n"
-"- `Iff` 类型\n"
-"  - `structure`命令、`Iff`的构造函数`Iff.intro`和定理`Iff.refl`\n"
-"  - `Iff.trans`\n"
-"  - `Iff.of_eq`\n"
-"- `And`类型：\n"
-"  - `And.symm`\n"
-"  - `and_assoc`\n"
-"- `Or`类型：\n"
-"  - `Or`的构造函数`Or.inl`和`Or.inr`和定理`Or.elim`\n"
-"  - `Or.symm`\n"
-"  - `or_assoc`\n"
-"- `Not` 类型\n"
-"  - `True` 类型和 `False` 类型\n"
-"  - `absurd`\n"
-"  - `not_not_intro`\n"
-"- `Exists` 类型\n"
-"  - `Exists.imp`"
+msgid "# Lean4 快速入门"
 msgstr ""
 
 #: Game

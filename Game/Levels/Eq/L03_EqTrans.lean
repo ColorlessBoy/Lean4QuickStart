@@ -38,3 +38,5 @@ motive := (fun {b : α} {_ : Eq a b} => Eq b c -> Eq a c)
 ```
 我建议你可以在草稿纸上拆解一下这个表达式，看看它是如何工作的。
 "
+
+end MyLogic

@@ -1,5 +1,4 @@
 import Game.Levels.Or.L03_OrAssoc
-import Game.MyLogic.Not
 
 World "Not"
 Level 1
@@ -46,6 +45,11 @@ recursor False.rec.{u} : (motive : False → Sort u) → (t : False) → motive 
 "
 namespace MyLogic
 
+inductive True : Prop where
+  | intro : True
+
+inductive False : Prop
+
 /--
 在 lean4 中经常用到的一个公理是 `trivial`，它表示 `True` 就是 `True`。
 -/
@@ -60,12 +64,20 @@ inductive True : Prop where
   | intro : True
 ```
 -/
-DefinitionDoc True as "True"
+DefinitionDoc MyLogic.True as "True"
 
 /-- False 类型
 ```lean
 inductive False : Prop
 ```
 -/
-DefinitionDoc False as "False"
-NewDefinition True False
+DefinitionDoc MyLogic.False as "False"
+NewDefinition MyLogic.True MyLogic.False
+
+/-- `True.intro` -/
+TheoremDoc MyLogic.True.intro as "True.intro" in "True"
+/-- `False.rec` -/
+TheoremDoc MyLogic.False.rec as "False.rec" in "False"
+NewTheorem MyLogic.True.intro MyLogic.False.rec
+
+end MyLogic

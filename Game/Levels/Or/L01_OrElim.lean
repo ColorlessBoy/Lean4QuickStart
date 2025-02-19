@@ -1,11 +1,8 @@
-import Game.MyLogic.Or
 import Game.Levels.Iff.L03_IffOfEq
 
 World "Or"
 Level 1
 Title "Or.elim"
-
-namespace MyLogic
 
 Introduction
 "
@@ -25,6 +22,15 @@ recursor Or.rec : ∀ {a b : Prop} {motive : Or a b → Prop},
 ```
 `Or.rec` 函数表示，我们可以证明某个命题在条件 `ha : a` 和 `hb : b` 下都成立，那么 `h: Or a b` 下则成立。
 "
+
+namespace MyLogic
+
+inductive Or (a b : Prop) : Prop where
+  /-- `Or.inl` is "left injection" into an `Or`. If `h : a` then `Or.inl h : a ∨ b`. -/
+  | inl (h : a) : Or a b
+  /-- `Or.inr` is "right injection" into an `Or`. If `h : b` then `Or.inr h : a ∨ b`. -/
+  | inr (h : b) : Or a b
+
 /--
 Or 的消去率
 -/
@@ -48,7 +54,15 @@ inductive Or (a b : Prop) : Prop where
   | inr : {a b : Prop} -> (h : b) -> Or a b
 ```
 -/
-DefinitionDoc Or as "Or"
-NewDefinition Or
+DefinitionDoc MyLogic.Or as "Or"
+NewDefinition MyLogic.Or
+
+/-- Or.inl -/
+TheoremDoc MyLogic.Or.inl as "Or.inl" in "Or"
+/-- Or.inr -/
+TheoremDoc MyLogic.Or.inr as "Or.inr" in "Or"
+/-- Or.rec -/
+TheoremDoc MyLogic.Or.rec as "Or.rec" in "Or"
+NewTheorem MyLogic.Or.inl MyLogic.Or.inr MyLogic.Or.rec
 
 end MyLogic

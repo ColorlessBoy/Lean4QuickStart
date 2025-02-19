@@ -1,5 +1,4 @@
-import Game.MyLogic.Exists
-import Game.Levels.Not.L03_NotNotIntro
+import Game.Levels.Not.L04_NotNotEm
 
 World "Exists"
 Level 1
@@ -26,9 +25,10 @@ recursor Exists.rec.{u} : ∀ {α : Sort u} {p : α → Prop} {motive : Exists p
 
 namespace MyLogic
 
-/--
-Exists.imp
--/
+inductive Exists {α : Sort u} (p : α → Prop) : Prop where
+  | intro (w : α) (h : p w) : Exists p
+
+/-- Exists.imp -/
 TheoremDoc MyLogic.Exists.imp as "Exists.imp" in "Exists"
 
 Statement Exists.imp : {α : Sort u} -> {p q : α -> Prop} -> (∀ (a : α), p a -> q a) -> Exists p -> Exists q := by
@@ -39,3 +39,19 @@ Statement Exists.imp : {α : Sort u} -> {p q : α -> Prop} -> (∀ (a : α), p a
   intro w hpw
   apply Exists.intro w
   exact hpq w hpw
+
+/-- Exists 类型
+```lean
+inductive Exists {α : Sort u} (p : α → Prop) : Prop where
+  | intro (w : α) (h : p w) : Exists p
+```
+-/
+DefinitionDoc MyLogic.Exists as "Exists"
+NewDefinition MyLogic.Exists
+/-- Exists.intro -/
+TheoremDoc MyLogic.Exists.intro as "Exists.intro" in "Exists"
+/-- Exists.rec -/
+TheoremDoc MyLogic.Exists.rec as "Exists.rec" in "Exists"
+NewTheorem MyLogic.Exists.intro MyLogic.Exists.rec
+
+end MyLogic
