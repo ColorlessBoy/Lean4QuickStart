@@ -6,7 +6,7 @@ Title "函数"
 
 Introduction "
 # 函数
-**函数**是一种内置的 `Term` ，也叫做 Lambda 表达式。Lean4 规定 Lambda 表达式的构造语法是 `fun (ArgTerm : ArgType) => BodyTerm` ，例如：`fun (a : Prop) => a` 。Lambda 表达式的简化语法是 `ArgTerm => BodyTerm`，例如 `fun a => a`。
+**函数**是一种内置的 `Term` ，也叫做 **Lambda 表达式**。Lean4 规定 Lambda 表达式的构造语法是 `fun (ArgTerm : ArgType) => BodyTerm` ，例如：`fun (a : Prop) => a` 。Lambda 表达式的简化语法是 `ArgTerm => BodyTerm`，例如 `fun a => a`。
 
 *凡事皆有类型*，**函数的类型**是另外一种内置的 `Term`，也叫做 **Forall 表达式**，或者 **箭头表达式**。Lean4 规定 箭头表达式的构造语法是 `(ArgTerm : ArgType) -> BodyType` ，例如 `(a : Prop) -> Prop` 。箭头表达式的简化语法是 `ArgType -> BodyType`，例如 `Prop -> Prop` 。并且，箭头表达式要求输入类型的类型和输出类型必须是宇宙层级，即 `ArgType : Sort u` 和 `BodyType : Sort v` 。
 
