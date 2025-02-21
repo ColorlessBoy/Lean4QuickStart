@@ -4,6 +4,9 @@ import Game.Levels.And.L01_AndSymm
 World "And"
 Level 2
 Title "and_assoc"
+Introduction "
+# And 的结合律
+"
 
 namespace MyLogic
 

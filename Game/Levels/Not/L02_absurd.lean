@@ -2,7 +2,7 @@ import Game.Levels.Not.L01_True
 
 World "Not"
 Level 2
-Title "absurd"
+Title "Not 类型"
 
 
 Introduction "

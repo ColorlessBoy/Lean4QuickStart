@@ -39,7 +39,10 @@ Statement : {α : Sort u} -> (a : α) -> Eq a a := by
 
 Conclusion "
 - 你可以使用 `exact fun {α : Sort u} (a : α) => Eq.refl a`；
-- 或者显式传入隐式参数 `exact fun {α : Sort u} (a : α) => @Eq.refl α a`。
+- 或者显式传入隐式参数 `exact fun {α : Sort u} (a : α) => @Eq.refl α a`；
+- 你甚至可以充分利用 lean4 编译器的自动补全功能，使用 `exact fun a => Eq.refl a`。
+
+我想你领略了 lean4 语法的多样性灵活性，我不希望你感到困惑，作为初学者，我也不建议你使用过于省略的功能。
 "
 
 end MyLogic

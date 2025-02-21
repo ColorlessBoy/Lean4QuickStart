@@ -1,7 +1,7 @@
 msgid ""
 msgstr "Project-Id-Version: Game v4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: Thu Feb 20 17:02:40 2025\n"
+"POT-Creation-Date: Fri Feb 21 08:49:48 2025\n"
 "Last-Translator: \n"
 "Language-Team: none\n"
 "Language: zh\n"
@@ -194,7 +194,7 @@ msgid "# 归纳类型\n"
 "## 例子\n"
 "```lean\n"
 "inductive Eq : {α : Sort u} -> α -> α -> Prop where\n"
-"  | refl : (a : α) -> Eq a a\n"
+"  | refl : {α : Sort u} -> (a : α) -> Eq a a\n"
 "```\n"
 "在这个例子中，我们定义了一个叫做 `Eq` 的归纳类型，它有一个参数 `α` 和一个构造器 `refl`。`refl` 构造器接受一个类型为 `α` 的值 `a`，并返回一个类型为 `Eq a a` 的值。\n"
 "\n"
@@ -208,7 +208,7 @@ msgid "# 归纳类型\n"
 "```lean\n"
 "namespace MyLogic\n"
 "inductive Eq : {α : Sort u} → α → α → Prop where\n"
-"  | refl (a : α) : Eq a a\n"
+"  | refl : (a : α) → Eq a a\n"
 "#check Eq.refl\n"
 "  -- ∀ {α : Sort u} (a : α), Eq a a\n"
 "#check Eq.rec\n"
@@ -219,16 +219,19 @@ msgid "# 归纳类型\n"
 "```\n"
 "后面的关卡我们会详细讲解它们的用法。\n"
 "\n"
-"这里再补充两个语法规则：\n"
-"- 首先，`∀` 符号表示“对于任意”，它其实是箭头函数的另一种写法。比如 `∀ {α : Sort u} (a : α), Eq a a` 等价于 `(α : Sort u) -> (a : α) -> Eq a a`；\n"
-"- 其次，`→` 和 `->` 是等价的。\n"
+"这里涉及三个新的语法规则：\n"
+"- 首先，`∀` 符号表示“对于任意”，它其实是箭头函数的另一种写法。比如 `∀ {α : Sort u} (a : α), Eq a a` 等价于 `{α : Sort u} -> (a : α) -> Eq a a`；\n"
+"- 其次，`→` 和 `->` 是等价的；\n"
+"- 最好，构造器可以简写成 `| refl : (a : α) → Eq a a` 由编译器自动补全 `α` 的类型。\n"
 "\n"
 "我想你已经感受到了，lean4中类似的语法糖非常多，主要是为了方便书写和阅读，大家需要适应一下。\n"
-"在编辑器输入`\\a` 可以获得希腊字母 `α`，`∖forall`可以得到全称量词符号`∀`，输入`∖to`可以得到箭头符号`→`。"
+"\n"
+"补充一个小技巧：在编辑器输入`\\a` 可以获得希腊字母 `α`，`∖forall`可以得到全称量词符号`∀`，输入`∖to`可以得到箭头符号`→`。"
 msgstr ""
 
 #: Game.Levels.Basic.L04_Inductive
-msgid "请写出一个表达式，它的类型是`{α : Sort u} -> α -> α -> Prop`。"
+msgid "请写出一个表达式，它的类型是`{α : Sort u} -> α -> α -> Prop`。\n"
+"游戏引擎已经定义了 `Eq` 类型，你可以直接使用它。"
 msgstr ""
 
 #: Game.Levels.Basic.L04_Inductive
@@ -245,7 +248,7 @@ msgstr ""
 msgid "等价关系 `Eq a b`\n"
 "```lean\n"
 "inductive Eq : {α : Sort u} → α → α → Prop where\n"
-"  | refl (a : α) : Eq a a\n"
+"  | refl : (a : α) → Eq a a\n"
 "```"
 msgstr ""
 
@@ -291,7 +294,10 @@ msgstr ""
 
 #: Game.Levels.Eq.L01_EqRefl
 msgid "- 你可以使用 `exact fun {α : Sort u} (a : α) => Eq.refl a`；\n"
-"- 或者显式传入隐式参数 `exact fun {α : Sort u} (a : α) => @Eq.refl α a`。"
+"- 或者显式传入隐式参数 `exact fun {α : Sort u} (a : α) => @Eq.refl α a`；\n"
+"- 你甚至可以充分利用 lean4 编译器的自动补全功能，使用 `exact fun a => Eq.refl a`。\n"
+"\n"
+"我想你领略了 lean4 语法的多样性灵活性，我不希望你感到困惑，作为初学者，我也不建议你使用过于省略的功能。"
 msgstr ""
 
 #: Game.Levels.Eq.L02_EqRec
@@ -352,8 +358,15 @@ msgid "你可以使用 `intro` 和 `apply` 策略来证明 `Eq` 的对称性\n"
 "exact fun {α : Sort u} => fun {a : α} => @Eq.rec α a (fun (x : α) (_ : Eq a x) => Eq x a) (Eq.refl a)\n"
 "````\n"
 "来证明 `Eq` 的对称性。这里注意两点：\n"
-"  - lean4 的隐式参数推断可能会出现问题，尝试使用`Eq.rec`；\n"
-"  - 对应的motive函数：`fun (x : α) (_ : Eq a x) => Eq x a`。"
+"  - 因为 lean4 的隐式参数推断会出现问题，所以使用了 `@Eq.rec`；\n"
+"  - motive函数是 `fun (x : α) (_ : Eq a x) => Eq x a`。\n"
+"\n"
+"**确认你真的明白 `apply Eq.rec` 做了什么事情**。这是理解 lean4 的关键。\n"
+"\n"
+"- 使用到的是 `@Eq.rec α a (fun (x : α) (_ : Eq a x) => Eq x a)`；\n"
+"- 它的类型是 `Eq a a -> {a_1 : α} -> (t : Eq a a_1) -> Eq a_1 a`；\n"
+"- 在lean4编译器看来 `{a_1 : α} -> (t : Eq a a_1) -> Eq a_1 a`和原始目标的 `{b : α} -> Eq a b -> Eq b a` 是完全等价的；\n"
+"- 所以 `apply rec` 后的新目标变成 `Eq a a`。"
 msgstr ""
 
 #: Game.Levels.Eq.L02_EqRec
@@ -371,11 +384,15 @@ msgid "Eq 的传递性"
 msgstr ""
 
 #: Game.Levels.Eq.L03_EqTrans
+msgid "# Eq 的传递性"
+msgstr ""
+
+#: Game.Levels.Eq.L03_EqTrans
 msgid "`Eq` 的传递性，即 `Eq a b -> Eq b c -> Eq a c`。"
 msgstr ""
 
 #: Game.Levels.Eq.L03_EqTrans
-msgid "你需要使用到公理 `Eq.rec`，策略 `intro` 和 `apply`。"
+msgid "要证明 Eq 类型的传递性，你需要使用到公理 `Eq.rec`，策略 `intro` 和 `apply`。"
 msgstr ""
 
 #: Game.Levels.Eq.L03_EqTrans
@@ -395,13 +412,18 @@ msgid "如果你使用的是 apply 自动补全的 `Eq.rec` 的参数，那么�
 "```\n"
 "这个表达式会被送到 lean4 的内核中进行类型校验，内核发现它的类型正是目标类型，所以它是一个合法的证明。\n"
 "```lean\n"
-"fun {α : Sort u} {a b c : α} => @Eq.rec α a (fun {b : α} {_ : Eq a b} => Eq b c -> Eq a c) (fun (h : Eq a c) => h) b\n"
+"fun {α : Sort u} {a b c : α} => @Eq.rec α a (fun {b : α} (_ : Eq a b) => Eq b c -> Eq a c) (fun (h : Eq a c) => h) b\n"
 "```\n"
 "这个表达式还是比较复杂的，关键是要理解 `Eq.rec` 的动机参数\n"
 "```lean\n"
-"motive := (fun {b : α} {_ : Eq a b} => Eq b c -> Eq a c)\n"
+"motive := (fun {b : α} (_ : Eq a b) => Eq b c -> Eq a c)\n"
 "```\n"
-"我建议你可以在草稿纸上拆解一下这个表达式，看看它是如何工作的。"
+"我建议你可以在草稿纸上拆解一下这个表达式，看看它是如何工作的。\n"
+"\n"
+"- 使用到的是 `@Eq.rec α a (fun {a_1 : α} (_ : Eq a a_1) => Eq a_1 c -> Eq a c)`；\n"
+"- 它的类型是 `(Eq a c -> Eq a c) -> {a_1 : α} -> Eq a a_1 -> Eq a_1 c -> Eq a c`；\n"
+"- 因为 `lean4` 能够自动推到隐式参数 `a_1 = b`，所以 `Eq a a_1 -> Eq a_1 c -> Eq a c` 和原始目标 `Eq a b -> Eq b c -> Eq a c` 是等价的；\n"
+"- 所以 `apply Eq.rec` 的结果是新目标 `Eq a c -> Eq a c`。"
 msgstr ""
 
 #: Game.Levels.Eq.L04_EqMp
@@ -409,7 +431,35 @@ msgid "Eq.mp"
 msgstr ""
 
 #: Game.Levels.Eq.L04_EqMp
+msgid "# Eq.mp"
+msgstr ""
+
+#: Game.Levels.Eq.L04_EqMp
 msgid "`Eq.mp` 是 Eq 版本的 modus ponens，即 `Eq a b -> a -> b`。"
+msgstr ""
+
+#: Game.Levels.Eq.L04_EqMp
+msgid "`Eq.mp` 是 Eq 版本的 modus ponens, 可以输入 `\\` 加 `b` 来输入 `β`。"
+msgstr ""
+
+#: Game.Levels.Eq.L04_EqMp
+msgid "你已经可以使用 `apply Eq.rec` 了，不需要 `intro β`"
+msgstr ""
+
+#: Game.Levels.Eq.L04_EqMp
+msgid "证明的具体细节是：\n"
+"- 使用到的是 `@Eq.rec (Sort u) α (fun {a_1 : Sort u} (_ : Eq a a_1) => α -> a_1)`；\n"
+"- 它的类型是 `α -> α -> {a_1 : Sort u} -> Eq a a_1 -> α -> a_1`；\n"
+"- 在 `lean4` 看来 `{a_1 : Sort u} -> Eq a a_1 -> α -> a_1` 和 `{β : Sort u} -> Eq α β -> α -> β` 是等价的；\n"
+"- 所以 `apply Eq.rec` 产生新目标 `α -> α`。\n"
+"\n"
+"希望这三个题目坐下来，你能完全理解如何使用 `Eq.rec`。\n"
+"\n"
+"- `Eq.rec` 是和 `Eq.refl` 相对的概念。\n"
+"- `Eq.refl` 是一个 **引入规则** (introduction rule)。当结论中有 `Eq` 类型时，通常会用到它。\n"
+"- `Eq.rec` 是一个 **消去规则** (elimination rule)。当条件中有 `Eq` 类型时，通常会用到它。\n"
+"\n"
+"不只是 `Eq` 类型，所有的类型都会有它的 **引入规则** 和 **消去规则**，这个结论在数理逻辑里相当深刻。"
 msgstr ""
 
 #: Game.Levels.Eq.L05_EqMpr
@@ -417,11 +467,19 @@ msgid "Eq.mpr"
 msgstr ""
 
 #: Game.Levels.Eq.L05_EqMpr
+msgid "# Eq.mpr"
+msgstr ""
+
+#: Game.Levels.Eq.L05_EqMpr
 msgid "`Eq.mpr` 是 Eq 版本的 modus ponens 的逆向版本 (reverse)，即 `Eq a b -> b -> a`。"
 msgstr ""
 
 #: Game.Levels.Eq.L05_EqMpr
-msgid "你可以尝试使用证明过的定理 `Eq.symm` 和 `Eq.mp`。"
+msgid "你可以尝试使用证明过的定理 `Eq.symm` 和 `Eq.mp`。在此之前请先使用 `intro α β h`"
+msgstr ""
+
+#: Game.Levels.Eq.L05_EqMpr
+msgid "请你一定要搞清楚 `apply Eq.mp` 和 `apply Eq.symm h` 究竟做了什么。不要因为 `apply` 强大的参数补全功能，反而迷失了内部原理，买椟还珠。"
 msgstr ""
 
 #: Game.Levels.Eq
@@ -447,9 +505,9 @@ msgid "# Iff 类型\n"
 "```\n"
 "\n"
 "本质上，它同时定义了三个函数：\n"
-"- `Iff.intro : {a b : Prop} -> (a -> b) -> (b -> a) -> Iff a b`\n"
-"- `Iff.mp : {a b : Prop} -> Iff a b -> a -> b`\n"
-"- `Iff.mpr : {a b : Prop} -> Iff a b -> b -> a`\n"
+"- (引入规则) `Iff.intro : {a b : Prop} -> (a -> b) -> (b -> a) -> Iff a b`\n"
+"- (消去规则) `Iff.mp : {a b : Prop} -> Iff a b -> a -> b`\n"
+"- (消去规则) `Iff.mpr : {a b : Prop} -> Iff a b -> b -> a`\n"
 "\n"
 "你可以简单地将这三个函数看成 `Iff` 类型的三个公理。\n"
 "如果分开定义类型和对应公理，既繁琐又容易出错，所以 `lean4` 设计了 `structure` 将这些过程打包封装。\n"
@@ -501,6 +559,10 @@ msgid "Iff 的传递性"
 msgstr ""
 
 #: Game.Levels.Iff.L02_IffTrans
+msgid "# Iff 的传递性"
+msgstr ""
+
+#: Game.Levels.Iff.L02_IffTrans
 msgid "Iff 的传递性"
 msgstr ""
 
@@ -525,11 +587,15 @@ msgid "Iff与Eq的关系"
 msgstr ""
 
 #: Game.Levels.Iff.L03_IffOfEq
+msgid "# Iff与Eq的关系"
+msgstr ""
+
+#: Game.Levels.Iff.L03_IffOfEq
 msgid "Iff 与 Eq 的关系"
 msgstr ""
 
 #: Game.Levels.Iff.L03_IffOfEq
-msgid "你可以尝试使用 `Eq.rec`"
+msgid "条件里有 `Eq`，所以可以尝试 `Eq.rec`"
 msgstr ""
 
 #: Game.Levels.Iff
@@ -550,9 +616,9 @@ msgid "# And 类型\n"
 "  right : b\n"
 "```\n"
 "它本质上定义了这三个函数：\n"
-"- `And.intro : (a b : Prop) -> And a b`\n"
-"- `And.left : {a b : Prop} -> And a b -> a`\n"
-"- `And.right : {a b : Prop} -> And a b -> b`"
+"- (引入规则) `And.intro : (a b : Prop) -> And a b`\n"
+"- (消去规则) `And.left : {a b : Prop} -> And a b -> a`\n"
+"- (消去规则) `And.right : {a b : Prop} -> And a b -> b`"
 msgstr ""
 
 #: Game.Levels.And.L01_AndSymm
@@ -587,6 +653,10 @@ msgstr ""
 
 #: Game.Levels.And.L02_AndAssoc
 msgid "and_assoc"
+msgstr ""
+
+#: Game.Levels.And.L02_AndAssoc
+msgid "# And 的结合律"
 msgstr ""
 
 #: Game.Levels.And.L02_AndAssoc
@@ -665,6 +735,10 @@ msgid "Or.symm"
 msgstr ""
 
 #: Game.Levels.Or.L02_OrSymm
+msgid "# Or 的对称性"
+msgstr ""
+
+#: Game.Levels.Or.L02_OrSymm
 msgid "Or 的对称性"
 msgstr ""
 
@@ -674,6 +748,10 @@ msgstr ""
 
 #: Game.Levels.Or.L03_OrAssoc
 msgid "or_assoc"
+msgstr ""
+
+#: Game.Levels.Or.L03_OrAssoc
+msgid "# Or 的结合律"
 msgstr ""
 
 #: Game.Levels.Or.L03_OrAssoc
@@ -755,7 +833,7 @@ msgid "`False.rec`"
 msgstr ""
 
 #: Game.Levels.Not.L02_absurd
-msgid "absurd"
+msgid "Not 类型"
 msgstr ""
 
 #: Game.Levels.Not.L02_absurd
@@ -788,7 +866,11 @@ msgid "Not 类型\n"
 msgstr ""
 
 #: Game.Levels.Not.L03_NotNotIntro
-msgid "not_not_intro"
+msgid "双重否定的引入规则"
+msgstr ""
+
+#: Game.Levels.Not.L03_NotNotIntro
+msgid "# 双重否定的引入规则"
 msgstr ""
 
 #: Game.Levels.Not.L03_NotNotIntro
@@ -805,7 +887,25 @@ msgid "- 这里涉及到一个非常深刻的概念，我们也无法证明 `(p:
 msgstr ""
 
 #: Game.Levels.Not.L04_NotNotEm
-msgid "not_not_em"
+msgid "双重否定版本的排中律"
+msgstr ""
+
+#: Game.Levels.Not.L04_NotNotEm
+msgid "# 双重否定版本的排中律\n"
+"\n"
+"这里涉及到一个非常深刻的概念\n"
+"- 我们可以证明双重否定版本的排中律 `(a : Prop) -> Not (Not (Or a (Not a)))`，\n"
+"- 但是无法证明排中律 `(a : Prop) -> Or a (Not a)`；\n"
+"- 我们也无法证明双重否定的 **消去规则** `(p: Prop) -> Not (Not p) -> p`；\n"
+"- 更深刻的是：在依赖类型论中，排中律并不是天然存在的公理。\n"
+"\n"
+"你可以直接声明排中律 `axiom em : (a : Prop) -> Or a (Not a)`。\n"
+"但是逻辑学家选择不这样做。在 lean4 里，先声明了**选择公理**，然后通过选择公理来证明排中律。\n"
+"如果你感兴趣，可以在 lean4 代码编辑界面输入 `#print Classical.em` 来查看具体证明过程。\n"
+"\n"
+"逻辑学家喜欢将公理最少化，如果发现一个公理能被其他公理证明，他们就非常开心。\n"
+"逻辑学家觉得公理越少，逻辑系统越简洁。但是，事实上逻辑系统广度的减少导致了逻辑体系深度的增加，反而造成了逻辑体系的复杂。\n"
+"而复杂性导致了难以学习入门，这也是形式化证明系统难以推广的原因吧。就像让小学生不学加减乘除法而直接学习群论，并不符合客观学习规律。"
 msgstr ""
 
 #: Game.Levels.Not.L04_NotNotEm
@@ -813,30 +913,11 @@ msgid "双重否定"
 msgstr ""
 
 #: Game.Levels.Not.L04_NotNotEm
-msgid "这道题目会比较困难，需要巧妙的构造"
-msgstr ""
-
-#: Game.Levels.Not.L04_NotNotEm
-msgid "`intro h`"
-msgstr ""
-
-#: Game.Levels.Not.L04_NotNotEm
-msgid "`apply h`"
+msgid "这道题目会比较困难，需要巧妙利用 Not 的定义，它本质上是个函数。"
 msgstr ""
 
 #: Game.Levels.Not.L04_NotNotEm
 msgid "`apply Or.inr`"
-msgstr ""
-
-#: Game.Levels.Not.L04_NotNotEm
-msgid "`apply fun (ha : a) => h (Or.inl ha)`"
-msgstr ""
-
-#: Game.Levels.Not.L04_NotNotEm
-msgid "- 这道题目很困难；\n"
-"- 这里涉及到一个非常深刻的概念，我们可以直接证明`(a : Prop) -> Not (Not (Or a (Not a)))`，但是无法证明`(a : Prop) -> Or a (Not a)`；\n"
-"- 我们也无法证明 `(p: Prop) -> Not (Not p) -> p`；\n"
-"- 更深刻的是：排中律在这里并不是天然存在的公理。"
 msgstr ""
 
 #: Game.Levels.Not
@@ -919,7 +1000,18 @@ msgid "# Lean4 快速入门\n"
 "本教程采用游戏化的方式，通过循序渐进的关卡设计，帮助你掌握 Lean4 的核心概念。每个关卡都包含详细的解释和练习，让你在实践中学习。\n"
 "\n"
 "网上很多教程跳过了一些重要的概念，比如类型系统，而是以lean4复杂的策略系统切入，非常不符合学习过程。\n"
-"因此我编制了本教程。我们将从最基本的类型系统开始，逐步深入，帮助你理解 Lean4 的核心概念。"
+"因此我编制了本教程。我们将从最基本的类型系统开始，逐步深入，帮助你理解 Lean4 的核心概念。\n"
+"\n"
+"## 相关资料\n"
+"- 本项目依赖的项目 lean4game: https://github.com/leanprover-community/lean4game\n"
+"- 本项目依赖的项目 GameSkeleton: https://github.com/hhu-adam/GameSkeleton\n"
+"- 线上的 lean4 代码编辑环境 lean4web: https://live.lean-lang.org/\n"
+"\n"
+"- lean4 项目源代码：https://github.com/leanprover/lean4\n"
+"- lean4 的开源数学定理库 mathlib4: https://github.com/leanprover-community/mathlib4\n"
+"- Theorem Proving in Lean 4：https://lean-lang.org/theorem_proving_in_lean4/#theorem-proving-in-lean-4\n"
+"- Functional Programming in Lean：https://lean-lang.org/functional_programming_in_lean/\n"
+"- Metaprogramming in Lean 4: https://leanprover-community.github.io/lean4-metaprogramming-book/"
 msgstr ""
 
 #: Game

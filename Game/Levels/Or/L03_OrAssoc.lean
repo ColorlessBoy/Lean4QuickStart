@@ -3,6 +3,7 @@ import Game.Levels.Or.L02_OrSymm
 World "Or"
 Level 3
 Title "or_assoc"
+Introduction "# Or 的结合律"
 
 namespace MyLogic
 

@@ -2,7 +2,9 @@ import Game.Levels.Not.L02_absurd
 
 World "Not"
 Level 3
-Title "not_not_intro"
+Title "双重否定的引入规则"
+
+Introduction "# 双重否定的引入规则"
 
 namespace MyLogic
 

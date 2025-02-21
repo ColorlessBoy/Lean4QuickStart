@@ -20,9 +20,9 @@ structure Iff (a b : Prop) : Prop where
 ```
 
 本质上，它同时定义了三个函数：
-- `Iff.intro : {a b : Prop} -> (a -> b) -> (b -> a) -> Iff a b`
-- `Iff.mp : {a b : Prop} -> Iff a b -> a -> b`
-- `Iff.mpr : {a b : Prop} -> Iff a b -> b -> a`
+- (引入规则) `Iff.intro : {a b : Prop} -> (a -> b) -> (b -> a) -> Iff a b`
+- (消去规则) `Iff.mp : {a b : Prop} -> Iff a b -> a -> b`
+- (消去规则) `Iff.mpr : {a b : Prop} -> Iff a b -> b -> a`
 
 你可以简单地将这三个函数看成 `Iff` 类型的三个公理。
 如果分开定义类型和对应公理，既繁琐又容易出错，所以 `lean4` 设计了 `structure` 将这些过程打包封装。

@@ -4,6 +4,11 @@ World "Iff"
 Level 2
 Title "Iff 的传递性"
 
+Introduction
+"
+# Iff 的传递性
+"
+
 namespace MyLogic
 
 /--

@@ -3,6 +3,7 @@ import Game.Levels.Or.L01_OrElim
 World "Or"
 Level 2
 Title "Or.symm"
+Introduction "# Or 的对称性"
 
 namespace MyLogic
 /--

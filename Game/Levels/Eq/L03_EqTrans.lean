@@ -4,6 +4,11 @@ World "Eq"
 Level 3
 Title "Eq 的传递性"
 
+Introduction
+"
+# Eq 的传递性
+"
+
 namespace MyLogic
 
 /--
@@ -12,7 +17,7 @@ namespace MyLogic
 TheoremDoc MyLogic.Eq.trans as "Eq.trans" in "Eq"
 
 Statement Eq.trans: {α : Sort u} -> {a : α} -> {b : α} -> {c : α} -> Eq a b -> Eq b c -> Eq a c := by
-  Hint "你需要使用到公理 `Eq.rec`，策略 `intro` 和 `apply`。"
+  Hint "要证明 Eq 类型的传递性，你需要使用到公理 `Eq.rec`，策略 `intro` 和 `apply`。"
   Branch
     apply fun {α : Sort u} {a b c : α} => @Eq.rec α a (fun {b : α} {_ : Eq a b} => Eq b c -> Eq a c) (fun (h : Eq a c) => h) b
   intro α a b c
@@ -30,13 +35,19 @@ set_option pp.all true
 ```
 这个表达式会被送到 lean4 的内核中进行类型校验，内核发现它的类型正是目标类型，所以它是一个合法的证明。
 ```lean
-fun {α : Sort u} {a b c : α} => @Eq.rec α a (fun {b : α} {_ : Eq a b} => Eq b c -> Eq a c) (fun (h : Eq a c) => h) b
+fun {α : Sort u} {a b c : α} => @Eq.rec α a (fun {b : α} (_ : Eq a b) => Eq b c -> Eq a c) (fun (h : Eq a c) => h) b
 ```
 这个表达式还是比较复杂的，关键是要理解 `Eq.rec` 的动机参数
 ```lean
-motive := (fun {b : α} {_ : Eq a b} => Eq b c -> Eq a c)
+motive := (fun {b : α} (_ : Eq a b) => Eq b c -> Eq a c)
 ```
 我建议你可以在草稿纸上拆解一下这个表达式，看看它是如何工作的。
+
+- 使用到的是 `@Eq.rec α a (fun {a_1 : α} (_ : Eq a a_1) => Eq a_1 c -> Eq a c)`；
+- 它的类型是 `(Eq a c -> Eq a c) -> {a_1 : α} -> Eq a a_1 -> Eq a_1 c -> Eq a c`；
+- 因为 `lean4` 能够自动推到隐式参数 `a_1 = b`，所以 `Eq a a_1 -> Eq a_1 c -> Eq a c` 和原始目标 `Eq a b -> Eq b c -> Eq a c` 是等价的；
+- 所以 `apply Eq.rec` 的结果是新目标 `Eq a c -> Eq a c`。
 "
+
 
 end MyLogic

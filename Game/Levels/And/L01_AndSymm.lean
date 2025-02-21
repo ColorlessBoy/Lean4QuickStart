@@ -16,9 +16,9 @@ structure And (a b : Prop) : Prop where
   right : b
 ```
 它本质上定义了这三个函数：
-- `And.intro : (a b : Prop) -> And a b`
-- `And.left : {a b : Prop} -> And a b -> a`
-- `And.right : {a b : Prop} -> And a b -> b`
+- (引入规则) `And.intro : (a b : Prop) -> And a b`
+- (消去规则) `And.left : {a b : Prop} -> And a b -> a`
+- (消去规则) `And.right : {a b : Prop} -> And a b -> b`
 "
 namespace MyLogic
 

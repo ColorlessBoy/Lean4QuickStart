@@ -60,8 +60,15 @@ apply Eq.refl
 exact fun {α : Sort u} => fun {a : α} => @Eq.rec α a (fun (x : α) (_ : Eq a x) => Eq x a) (Eq.refl a)
 ````
 来证明 `Eq` 的对称性。这里注意两点：
-  - lean4 的隐式参数推断可能会出现问题，尝试使用`Eq.rec`；
-  - 对应的motive函数：`fun (x : α) (_ : Eq a x) => Eq x a`。
+  - 因为 lean4 的隐式参数推断会出现问题，所以使用了 `@Eq.rec`；
+  - motive函数是 `fun (x : α) (_ : Eq a x) => Eq x a`。
+
+**确认你真的明白 `apply Eq.rec` 做了什么事情**。这是理解 lean4 的关键。
+
+- 使用到的是 `@Eq.rec α a (fun (x : α) (_ : Eq a x) => Eq x a)`；
+- 它的类型是 `Eq a a -> {a_1 : α} -> (t : Eq a a_1) -> Eq a_1 a`；
+- 在lean4编译器看来 `{a_1 : α} -> (t : Eq a a_1) -> Eq a_1 a`和原始目标的 `{b : α} -> Eq a b -> Eq b a` 是完全等价的；
+- 所以 `apply rec` 后的新目标变成 `Eq a a`。
 "
 
 /--
