@@ -1,7 +1,7 @@
 msgid ""
 msgstr "Project-Id-Version: Game v4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: Fri Feb 21 08:49:48 2025\n"
+"POT-Creation-Date: Tue Mar 18 22:54:40 2025\n"
 "Last-Translator: \n"
 "Language-Team: none\n"
 "Language: zh\n"
@@ -480,6 +480,18 @@ msgstr ""
 
 #: Game.Levels.Eq.L05_EqMpr
 msgid "请你一定要搞清楚 `apply Eq.mp` 和 `apply Eq.symm h` 究竟做了什么。不要因为 `apply` 强大的参数补全功能，反而迷失了内部原理，买椟还珠。"
+msgstr ""
+
+#: Game.Levels.Eq.L06_EqSubst
+msgid "Eq.subst"
+msgstr ""
+
+#: Game.Levels.Eq.L06_EqSubst
+msgid "# Eq.subst"
+msgstr ""
+
+#: Game.Levels.Eq.L06_EqSubst
+msgid "`Eq.subst` 是替换原理，即 `Eq a b -> motive a -> motive b`。"
 msgstr ""
 
 #: Game.Levels.Eq

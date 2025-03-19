@@ -1,4 +1,4 @@
-import Game.Levels.Eq.L05_EqMpr
+import Game.Levels.Eq.L06_EqSubst
 
 World "Iff"
 Level 1
